@@ -1,7 +1,8 @@
 public class SingleFamilyHouse extends InvestmentProperty {
 
     // implement the abstract method inherited from the superclass
-    public double annualCost(double price, int loanLength) {
-        return price;
+    public double mortgagePayment(int principal, int loanInYears, double interest) {
+        double x = 0;
+        return x;
     }
 }
