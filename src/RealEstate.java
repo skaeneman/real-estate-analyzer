@@ -1,3 +1,12 @@
+/**
+ * The RealEstateAnalyzer program will evaluate different types of real estate
+ * investments and generate output to see if the investment is potentially profitable.
+ *
+ * @author  Scott Kaeneman
+ * @version 1.0
+ * @since   2020-22-01
+ */
+
 import java.util.Scanner;
 
 public class RealEstate {
@@ -20,12 +29,10 @@ public class RealEstate {
             double mortgage = investment.mortgagePayment(300000, 30, 5);
             System.out.println("mortgage payment " + mortgage);
         }
-        else if (propertType == "single-family") {
+        else if (propertType.equals("single-family")) {
             // instantiate a new SingleFamilyHouse object and call its methods
             SingleFamilyHouse investment = new SingleFamilyHouse();
         }
-
-
 
     } //main
 }
