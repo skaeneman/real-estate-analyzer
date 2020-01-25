@@ -1,7 +1,7 @@
-public class MultiFamilyHouse extends House{
+public class MultiFamilyHouse extends InvestmentProperty {
 
     // implement the abstract method inherited from the superclass
-    public double cost(double price, int loanLength) {
+    public double annualCost(double price, int loanLength) {
         return price;
     }
 }
