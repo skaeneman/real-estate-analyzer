@@ -12,10 +12,9 @@ import java.util.Scanner;
 public class RealEstate {
 
     public static void main(String[] args) {
-
+        // get user input from Scanner
         Scanner input = new Scanner(System.in);
 
-        // get user input from Scanner
         System.out.println("Enter type of investment property:");
         String propertType = input.nextLine();
 
