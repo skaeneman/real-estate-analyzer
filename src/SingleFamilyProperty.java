@@ -1,12 +1,13 @@
 public class SingleFamilyProperty extends InvestmentProperty {
 
-    // implement the abstract method inherited from the superclass
-    public void display() {
-        System.out.println("this will eventually display something...");
+    public SingleFamilyProperty() {
+
     }
 
-    SingleFamilyProperty singleFamily = new SingleFamilyProperty();
-    double monthlyMortgage = singleFamily.mortgagePayment(100, 12, 34);
+    // implement the abstract method inherited from the superclass
+    public void display() {
+        System.out.println("eventually will display single-family analysis...");
+    }
 
 
 }

@@ -28,7 +28,7 @@ public class Main {
             System.out.println("mortgage payment " + mortgage);
         }
         else if (propertyType.equals("single-family")) {
-            // instantiate a new SingleFamilyHouse object and call its methods
+            // instantiate a new SingleFamilyProperty object and call its methods
             SingleFamilyProperty investment = new SingleFamilyProperty();
         }
 
