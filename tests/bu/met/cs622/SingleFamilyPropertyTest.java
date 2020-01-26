@@ -10,12 +10,4 @@ class SingleFamilyPropertyTest {
     void display() {
     }
 
-    @Test
-    void singleFamilyMortgage() {
-        SingleFamilyProperty investment = new SingleFamilyProperty();
-        double mortgage = investment.mortgagePayment(250000, 30, 5);
-        assertEquals(1342.0540575303496, mortgage);
-    }
-
-
 }

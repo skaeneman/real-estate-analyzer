@@ -6,15 +6,16 @@ public class MultiFamilyProperty extends InvestmentProperty {
 
     }
 
-    // implement the abstract method inherited from the superclass
+    // implement the abstract method inherited from the parent class
     public void display() {
-        System.out.println("eventually will display multi-family analysis...");
-    }
+        MultiFamilyProperty multiFam = new MultiFamilyProperty();
+        double mortgage = multiFam.mortgagePayment(300000, 30, 5);
+        double noi = multiFam.netOperatingIncome(90000, 12000,15000,
+                1200, 6000);
 
-    //    @Override
-    //    public void display() {
-    //
-    //    }
+        System.out.println("mortgage payment " + mortgage);
+        System.out.println("Net Operating Income (NOI) " + noi);
+    }
 
 
 }

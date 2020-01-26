@@ -26,14 +26,12 @@ public class Main {
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
             MultiFamilyProperty multiFam = new MultiFamilyProperty();
-            double mortgage = multiFam.mortgagePayment(300000, 30, 5);
-            System.out.println("mortgage payment " + mortgage);
+            multiFam.display();
         }
         else if (propertyType.equals("s")) {
             // instantiate a new SingleFamilyProperty object and call its methods
             SingleFamilyProperty singleFam = new SingleFamilyProperty();
-            double mortgage = singleFam.mortgagePayment(300000, 30, 5);
-            System.out.println("mortgage payment " + mortgage);
+            singleFam.display();
         }
 
     } //main

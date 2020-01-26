@@ -26,5 +26,22 @@ public abstract class InvestmentProperty {
         return mortgagePayment;
     }
 
+    /**
+     * Returns the Net Operating Income (NOI) of a property which is the
+     * Gross Operating Income (GOI) minus any taxes, maintenance, and insurance, etc...
+     *
+     * @param  grossIncome  the top line revenue of the investment
+     * @param  taxes        the amount of money paid to the IRS
+     * @param  maintenance  any repair costs for the property
+     * @param  insurance    the money spent to insure a property
+     * @param  utilities    the cost of water, gas, electric for the property
+     *
+     * @return      the Net Operating Income (NOI) for a property
+     */
+    protected final double netOperatingIncome(double grossIncome, double taxes, double maintenance,
+                                              double insurance, double utilities) {
+
+        return grossIncome - (taxes + maintenance + insurance + utilities);
+    }
 
 }
