@@ -5,7 +5,7 @@
 
 public class ReturnOne {
     /**
-     * Returns the integer 1 to calibrate JUnit tests
+     * Returns the integer 1 for a JUnit test
      * @return      the integer 1 will always be returned
      */
     public static int testData() {
