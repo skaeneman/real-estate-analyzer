@@ -1,3 +1,5 @@
+package bu.met.cs622;
+
 public class MultiFamilyProperty extends InvestmentProperty {
 
     public MultiFamilyProperty() {
@@ -8,7 +10,6 @@ public class MultiFamilyProperty extends InvestmentProperty {
     public void display() {
         System.out.println("eventually will display multi-family analysis...");
     }
-
 
     //    @Override
     //    public void display() {

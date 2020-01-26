@@ -1,3 +1,5 @@
+package bu.met.cs622;
+
 /**
  * The RealEstateAnalyzer program will evaluate different types of real estate
  * investments and generate output to see if the investment is potentially profitable.
@@ -23,13 +25,15 @@ public class Main {
 
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
-            MultiFamilyProperty investment = new MultiFamilyProperty();
-            double mortgage = investment.mortgagePayment(300000, 30, 5);
+            MultiFamilyProperty multiFam = new MultiFamilyProperty();
+            double mortgage = multiFam.mortgagePayment(300000, 30, 5);
             System.out.println("mortgage payment " + mortgage);
         }
-        else if (propertyType.equals("single-family")) {
+        else if (propertyType.equals("s")) {
             // instantiate a new SingleFamilyProperty object and call its methods
-            SingleFamilyProperty investment = new SingleFamilyProperty();
+            SingleFamilyProperty singleFam = new SingleFamilyProperty();
+            double mortgage = singleFam.mortgagePayment(300000, 30, 5);
+            System.out.println("mortgage payment " + mortgage);
         }
 
     } //main

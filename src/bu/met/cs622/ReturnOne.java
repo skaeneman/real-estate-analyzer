@@ -1,3 +1,5 @@
+package bu.met.cs622;
+
 /**
  * The ReturnOne class is used for testing JUnit and consists
  * of a single method that will always return the integer one

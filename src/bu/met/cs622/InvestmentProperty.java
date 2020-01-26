@@ -1,3 +1,5 @@
+package bu.met.cs622;
+
 public abstract class InvestmentProperty {
 
     /**
