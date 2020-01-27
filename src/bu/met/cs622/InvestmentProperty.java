@@ -8,8 +8,7 @@ public abstract class InvestmentProperty {
     public abstract void display();
 
     /**
-     * Returns an object representing the amount of money to be
-     * paid each month as a mortgage payment.
+     * Returns the amount of money to be paid each month towards the property's mortgage.
      *
      * @param  principal    the outstanding balance owed on the house
      * @param  loanInYears  the length of the loan in years
