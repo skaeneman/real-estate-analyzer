@@ -14,8 +14,7 @@ public class MultiFamilyProperty extends InvestmentProperty {
         double noi = multiFam.netOperatingIncome(90000, 12000,15000,
                 1200, 6000);
 
-        double capRate = multiFam.capitalizationRate(90000, 12000,15000,
-                1200, 6000, 850000);
+        double capRate = multiFam.capitalizationRate(90000, 850000);
 
         System.out.println("********************* Multi-Family Analysis *******************");
         System.out.println("mortgage payment " + mortgage);

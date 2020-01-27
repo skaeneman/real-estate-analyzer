@@ -44,24 +44,18 @@ public abstract class InvestmentProperty {
     }
 
     /**
-     * Returns the capitalization rate for a property by first calculating the
-     * Net Operating Income (NOI) and then dividing it by the property's value.
-     * Capitalization Rate = Net Operating Income / Current Market Value
+     * Returns the capitalization by taking the Net Operating Income (NOI)
+     * and dividing it by the property's value.
      *
-     * @param  grossIncome  the top line revenue of the investment
-     * @param  taxes        the amount of money paid to the IRS
-     * @param  maintenance  any repair costs for the property
-     * @param  insurance    the money spent to insure a property
-     * @param  utilities    the cost of water, gas, electric for the property
+     * @param  noi  the net operating income (NOI)
      * @param  marketValue  the current value of the home if it were to be sold today
      *
      * @return      the capitalization rate (cap rate) for a property
      */
-    protected final double capitalizationRate(double grossIncome, double taxes, double maintenance,
-                                              double insurance, double utilities, double marketValue) {
+    protected final double capitalizationRate(double noi, double marketValue){
 
         // return the value as a percentage so multiply by 100
-        return ((grossIncome - (taxes + maintenance + insurance + utilities)) / marketValue) * 100;
+        return (noi / marketValue) * 100;
     }
 
 
