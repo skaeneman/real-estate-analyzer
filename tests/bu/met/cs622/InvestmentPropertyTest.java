@@ -25,4 +25,13 @@ class InvestmentPropertyTest {
 
         assertEquals(55800, noi);
     }
+
+    @Test
+    void capitalizationRate() {
+        double capRate = multiFam.capitalizationRate(90000, 12000,15000,
+                1200, 6000, 850000);
+
+        assertEquals(6.564705882352941, capRate);
+    }
+
 }
