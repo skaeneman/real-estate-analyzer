@@ -11,7 +11,10 @@ class InvestmentPropertyTest {
             30, 1200, 15000, 1200, 6000, 850000, 90000);
 
     // instantiate SingleFamilyProperty object to test abstract class methods
-    SingleFamilyProperty singleFam = new SingleFamilyProperty(4.2, 2300);
+    SingleFamilyProperty singleFam = new SingleFamilyProperty(4.7, 3000, 300000,
+                                                              30, 1200, 15000,
+                                                              1200, 6000, 850000,
+                                                              90000);
 
     @Test
     void mortgagePayment() {

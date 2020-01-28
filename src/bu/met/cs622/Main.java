@@ -35,17 +35,17 @@ public class Main {
                                                                       90000);
 
             if (multiFamProp instanceof MultiFamilyProperty) {
-                propertyReport = ((MultiFamilyProperty) multiFamProp).analyzeProperty((MultiFamilyProperty) multiFamProp);
+                propertyReport = ((MultiFamilyProperty) multiFamProp).analyzeMultiFamilyProperty((MultiFamilyProperty) multiFamProp);
                 ((MultiFamilyProperty) multiFamProp).display(propertyReport);
                 System.out.println(multiFamProp.propertySquareFootage());
             }
         }
         else if (propertyType.equals("s")) {
             // downcast
-            InvestmentProperty singleFamProp = new SingleFamilyProperty(4.5, 3500);
-            if (singleFamProp instanceof SingleFamilyProperty) {
-                ((SingleFamilyProperty) singleFamProp).display();
-            }
+//            InvestmentProperty singleFamProp = new SingleFamilyProperty(4.5, 3500);
+//            if (singleFamProp instanceof SingleFamilyProperty) {
+//                propertyReport = ((SingleFamilyProperty) singleFamProp).analyzeSingleFamilyProperty((SingleFamilyProperty) singleFamProp);
+//            }
         }
 
     } //main

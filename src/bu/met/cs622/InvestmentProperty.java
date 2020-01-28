@@ -5,19 +5,50 @@ import java.util.ArrayList;
 public abstract class InvestmentProperty {
 
     private final double squareFeet;
+    private final int principal;
+    private final int loanInYears;
+    private final double taxes;
+    private final double maintenance;
+    private final double insurance;
+    private final double utilities;
+    private final int marketValue;
+    private final double rentalIncome;
 
-    // constructor
-    public InvestmentProperty(double squareFeet) {
+
+    public InvestmentProperty(double squareFeet, int principal, int loanInYears, double taxes, double maintenance,
+                              double insurance, double utilities, int marketValue, double rentalIncome) {
+
         this.squareFeet = squareFeet;
+        this.principal = principal;
+        this.loanInYears = loanInYears;
+        this.taxes = taxes;
+        this.maintenance = maintenance;
+        this.insurance = insurance;
+        this.utilities = utilities;
+        this.marketValue = marketValue;
+        this.rentalIncome = rentalIncome;
     }
 
     // getter for squareFeet of a property
     public double getSquareFeet() { return squareFeet; }
 
+
+    public int getPrincipal() { return principal; }
+    public int getLoanInYears() { return loanInYears; }
+    public double getTaxes() { return taxes; }
+    public double getMaintenance() { return maintenance; }
+    public double getInsurance() { return insurance; }
+    public double getUtilities() { return utilities; }
+    public int getMarketValue() { return marketValue; }
+    public double getRentalIncome() { return  rentalIncome; }
+
+
+
+
     // display results from the investment analysis run on a property.
     public abstract void display(ArrayList<String> propertyAnalysis);
 
-    // interest rates are effected by property type (primary residence, second home, solely an investment, etc...)
+    // banks adjust interest rates by property type (primary residence, second home, solely an investment, etc...)
     public abstract void mortgageInterestRate();
 
     // return a property's size in square feet
