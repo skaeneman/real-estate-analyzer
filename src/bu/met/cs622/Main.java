@@ -9,11 +9,14 @@ package bu.met.cs622;
  * @since   2020-22-01
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        ArrayList<String> propertyReport;
+
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
 
@@ -26,9 +29,14 @@ public class Main {
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
             // downcast
-            InvestmentProperty multiFamProp = new MultiFamilyProperty(3.3, 3000);
+            InvestmentProperty multiFamProp = new MultiFamilyProperty(4.7, 3000, 300000,
+                                                                      30, 1200, 15000,
+                                                                      1200, 6000, 850000,
+                                                                      90000);
+
             if (multiFamProp instanceof MultiFamilyProperty) {
-//                ((MultiFamilyProperty) multiFamProp).display();
+                propertyReport = ((MultiFamilyProperty) multiFamProp).analyzeProperty((MultiFamilyProperty) multiFamProp);
+                ((MultiFamilyProperty) multiFamProp).display(propertyReport);
                 System.out.println(multiFamProp.propertySquareFootage());
             }
         }

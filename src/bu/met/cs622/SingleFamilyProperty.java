@@ -1,10 +1,17 @@
 package bu.met.cs622;
 
+import java.util.ArrayList;
+
 public class SingleFamilyProperty extends InvestmentProperty {
 
     // constructor
     public SingleFamilyProperty(double interestRate, double squareFeet) {
         super(squareFeet);
+    }
+
+    @Override
+    public void display(ArrayList<String> propertyAnalysis) {
+
     }
 
     @Override

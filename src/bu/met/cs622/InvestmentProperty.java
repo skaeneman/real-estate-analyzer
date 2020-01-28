@@ -1,5 +1,7 @@
 package bu.met.cs622;
 
+import java.util.ArrayList;
+
 public abstract class InvestmentProperty {
 
     private final double squareFeet;
@@ -12,8 +14,8 @@ public abstract class InvestmentProperty {
     // getter for squareFeet of a property
     public double getSquareFeet() { return squareFeet; }
 
-    //Display results from the investment analysis run on a property.
-    public abstract void display();
+    // display results from the investment analysis run on a property.
+    public abstract void display(ArrayList<String> propertyAnalysis);
 
     // interest rates are effected by property type (primary residence, second home, solely an investment, etc...)
     public abstract void mortgageInterestRate();
