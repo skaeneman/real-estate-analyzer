@@ -2,13 +2,14 @@ package bu.met.cs622;
 
 public class SingleFamilyProperty extends InvestmentProperty {
 
-    public SingleFamilyProperty() {
-
+    // constructor
+    public SingleFamilyProperty(double interestRate, double squareFeet) {
+        super(interestRate, squareFeet);
     }
 
     // implement the abstract method inherited from the parent class
     public void display() {
-        SingleFamilyProperty singleFamily = new SingleFamilyProperty();
+        SingleFamilyProperty singleFamily = new SingleFamilyProperty(5, 3000);
         double mortgage = singleFamily.mortgagePayment(300000, 30, 5);
         double noi = singleFamily.netOperatingIncome(90000, 12000,15000,
                 1200, 6000);

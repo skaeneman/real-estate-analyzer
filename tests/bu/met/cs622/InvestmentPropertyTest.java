@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class InvestmentPropertyTest {
 
     // instantiate MultiFamilyProperty object to test abstract class methods
-    MultiFamilyProperty multiFam = new MultiFamilyProperty();
+    MultiFamilyProperty multiFam = new MultiFamilyProperty(3.7, 1200);
 
     // instantiate SingleFamilyProperty object to test abstract class methods
-    SingleFamilyProperty singleFam = new SingleFamilyProperty();
+    SingleFamilyProperty singleFam = new SingleFamilyProperty(4.2, 2300);
 
     @Test
     void mortgagePayment() {

@@ -26,14 +26,14 @@ public class Main {
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
             // downcast
-            InvestmentProperty multiFamProp = new MultiFamilyProperty();
+            InvestmentProperty multiFamProp = new MultiFamilyProperty(5, 3000);
             if (multiFamProp instanceof MultiFamilyProperty) {
                 ((MultiFamilyProperty) multiFamProp).display();
             }
         }
         else if (propertyType.equals("s")) {
             // downcast
-            InvestmentProperty singleFamProp = new SingleFamilyProperty();
+            InvestmentProperty singleFamProp = new SingleFamilyProperty(4.5, 3500);
             if (singleFamProp instanceof SingleFamilyProperty) {
                 ((SingleFamilyProperty) singleFamProp).display();
             }

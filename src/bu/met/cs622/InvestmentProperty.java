@@ -22,8 +22,8 @@ public abstract class InvestmentProperty {
      */
     public abstract void display();
 
-    public String currentInterestRate(int rate) {
-       return String.format("%s Today's interest rate is: %s", rate);
+    public String currentInterestRate() {
+       return String.format("%s Today's interest rate is: %s", getInterestRate());
     }
 
     /**
