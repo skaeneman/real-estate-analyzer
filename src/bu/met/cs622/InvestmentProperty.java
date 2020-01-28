@@ -17,13 +17,18 @@ public abstract class InvestmentProperty {
     // getter for squareFeet
     public double getSquareFeet() { return squareFeet; }
 
+//    // setter for interestRate
+//    public void setInterestRate(double interestRate) {
+//        this.interestRate = interestRate;
+//    }
+
     /**
      * Display results from the investment analysis run on a property.
      */
     public abstract void display();
 
     public String currentInterestRate() {
-       return String.format("%s Today's interest rate is: %s", getInterestRate());
+       return String.format("Super interest rate is: %s", getInterestRate());
     }
 
     /**
