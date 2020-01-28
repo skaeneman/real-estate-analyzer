@@ -79,7 +79,7 @@ public class MultiFamilyProperty extends InvestmentProperty {
         for (String prop : propertyAnalysis) {
             System.out.println(prop);
         }
-        System.out.println("***************************************************************");
+//        System.out.println("***************************************************************");
     }
 
 }//class

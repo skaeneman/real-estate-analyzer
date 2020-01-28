@@ -73,7 +73,7 @@ public class SingleFamilyProperty extends InvestmentProperty {
         for (String singleProp : propertyAnalysis) {
             System.out.println(singleProp);
         }
-        System.out.println("***************************************************************");
+//        System.out.println("***************************************************************");
     }
 
 
