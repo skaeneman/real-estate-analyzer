@@ -4,7 +4,12 @@ public class SingleFamilyProperty extends InvestmentProperty {
 
     // constructor
     public SingleFamilyProperty(double interestRate, double squareFeet) {
-        super(interestRate, squareFeet);
+        super(squareFeet);
+    }
+
+    @Override
+    public void mortgageInterestRate() {
+
     }
 
     // implement the abstract method inherited from the parent class
@@ -17,4 +22,6 @@ public class SingleFamilyProperty extends InvestmentProperty {
         System.out.println("single-family house mortgage: " + mortgage);
         System.out.println("single-family house Net Operating Income (NOI): " + noi);
     }
+
+
 }

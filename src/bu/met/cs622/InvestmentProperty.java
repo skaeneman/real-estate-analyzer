@@ -2,33 +2,25 @@ package bu.met.cs622;
 
 public abstract class InvestmentProperty {
 
-    private final double interestRate;
     private final double squareFeet;
 
     // constructor
-    public InvestmentProperty(double interestRate, double squareFeet) {
-        this.interestRate = interestRate;
+    public InvestmentProperty(double squareFeet) {
         this.squareFeet = squareFeet;
     }
 
-    // getter for interestRate
-    public double getInterestRate() { return interestRate; }
-
-    // getter for squareFeet
+    // getter for squareFeet of a property
     public double getSquareFeet() { return squareFeet; }
 
-//    // setter for interestRate
-//    public void setInterestRate(double interestRate) {
-//        this.interestRate = interestRate;
-//    }
-
-    /**
-     * Display results from the investment analysis run on a property.
-     */
+    //Display results from the investment analysis run on a property.
     public abstract void display();
 
-    public String currentInterestRate() {
-       return String.format("Super interest rate is: %s", getInterestRate());
+    // interest rates are effected by property type (primary residence, second home, solely an investment, etc...)
+    public abstract void mortgageInterestRate();
+
+
+    public String propertySquareFootage() {
+       return String.format("Square feet: %s", getSquareFeet());
     }
 
     /**

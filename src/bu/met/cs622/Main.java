@@ -28,7 +28,8 @@ public class Main {
             // downcast
             InvestmentProperty multiFamProp = new MultiFamilyProperty(3.3, 3000);
             if (multiFamProp instanceof MultiFamilyProperty) {
-                ((MultiFamilyProperty) multiFamProp).display();
+//                ((MultiFamilyProperty) multiFamProp).display();
+                System.out.println(multiFamProp.propertySquareFootage());
             }
         }
         else if (propertyType.equals("s")) {

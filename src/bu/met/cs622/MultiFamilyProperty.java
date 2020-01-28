@@ -2,14 +2,31 @@ package bu.met.cs622;
 
 public class MultiFamilyProperty extends InvestmentProperty {
 
+    private double interestRate;
+
     // constructor
     public MultiFamilyProperty(double interestRate, double squareFeet) {
-        super(interestRate, squareFeet);
+        super(squareFeet);  // inherit from parent class
+        this.interestRate = interestRate;
+    }
+
+    // getter for interestRate
+    public double getInterestRate() { return interestRate; }
+
+    // setter for interestRate
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
     }
 
     @Override
-    public String currentInterestRate() {
-        return String.format("calling super from child class in Override method: %s%n", super.currentInterestRate());
+    public void mortgageInterestRate() {
+
+    }
+
+    @Override
+    public String propertySquareFootage() {
+        return String.format("%s %n%s %s%%", super.propertySquareFootage(),
+                             "multi-family interest rate:", getInterestRate());
     }
 
     // implement the abstract method inherited from the parent class
@@ -34,11 +51,11 @@ public class MultiFamilyProperty extends InvestmentProperty {
         System.out.println("Net Operating Income (NOI) " + noi);
         System.out.println("Capitalization Rate: " + capRate);
 
-        System.out.println("Rate....: " + multiFam.currentInterestRate());
+        // display interest rate with polymorphism
+//        System.out.println(multiFam.currentInterestRate());
 
         System.out.println("***************************************************************");
     }
-
 
 }
 
