@@ -27,8 +27,16 @@ public class Main {
 
         // ensure input is valid
         if (propertyType.equals("m") || propertyType.equals("s")) {
-            System.out.println("Enter price of investment property:");
-            propertyPrice = input.nextDouble();
+
+
+            try {
+                System.out.println("Enter price of investment property:");
+                propertyPrice = Integer.valueOf(input.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Not a valid number.");
+                System.exit(0);
+            }
+
         } else {
             System.out.println("Sorry that was not a valid choice.  Program ending.");
             System.exit(0);

@@ -53,10 +53,6 @@ public class SingleFamilyProperty extends InvestmentProperty {
         int marketValue = property.getMarketValue();
         double interest = property.getInterestRate();
 
-        System.out.println(principal);
-        System.out.println(loan);
-        System.out.println(interest);
-
         // call methods to run analysis on the property
         double mortgage = property.mortgagePayment(principal, loan, interest);
         double noi = property.netOperatingIncome(rentalIncome, taxes, maintenance, insurance, utilities);
