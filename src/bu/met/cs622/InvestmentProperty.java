@@ -18,7 +18,7 @@ public abstract class InvestmentProperty {
     // interest rates are effected by property type (primary residence, second home, solely an investment, etc...)
     public abstract void mortgageInterestRate();
 
-
+    // return a property's size in square feet
     public String propertySquareFootage() {
        return String.format("Square feet: %s", getSquareFeet());
     }
