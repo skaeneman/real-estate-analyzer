@@ -2,10 +2,29 @@ package bu.met.cs622;
 
 public abstract class InvestmentProperty {
 
+    private final double interestRate;
+    private final double squareFeet;
+
+    // constructor
+    public InvestmentProperty(double interestRate, double squareFeet) {
+        this.interestRate = interestRate;
+        this.squareFeet = squareFeet;
+    }
+
+    // getter for interestRate
+    public double getInterestRate() { return interestRate; }
+
+    // getter for squareFeet
+    public double getSquareFeet() { return squareFeet; }
+
     /**
      * Display results from the investment analysis run on a property.
      */
     public abstract void display();
+
+    public String currentInterestRate(int rate) {
+       return String.format("%s Today's interest rate is: %s", rate);
+    }
 
     /**
      * Returns the amount of money to be paid each month towards the property's mortgage.
