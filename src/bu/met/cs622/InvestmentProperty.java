@@ -14,7 +14,7 @@ public abstract class InvestmentProperty {
     private final int marketValue;
     private final double rentalIncome;
 
-
+    // constructor
     public InvestmentProperty(double squareFeet, int principal, int loanInYears, double taxes, double maintenance,
                               double insurance, double utilities, int marketValue, double rentalIncome) {
 
@@ -29,10 +29,8 @@ public abstract class InvestmentProperty {
         this.rentalIncome = rentalIncome;
     }
 
-    // getter for squareFeet of a property
+    // getter accessor methods
     public double getSquareFeet() { return squareFeet; }
-
-
     public int getPrincipal() { return principal; }
     public int getLoanInYears() { return loanInYears; }
     public double getTaxes() { return taxes; }
@@ -42,27 +40,25 @@ public abstract class InvestmentProperty {
     public int getMarketValue() { return marketValue; }
     public double getRentalIncome() { return  rentalIncome; }
 
-
-
-
     // display results from the investment analysis run on a property.
     public abstract void display(ArrayList<String> propertyAnalysis);
 
     // banks adjust interest rates by property type (primary residence, second home, solely an investment, etc...)
     public abstract void mortgageInterestRate();
 
-    // return a property's size in square feet
+    /**
+     * Concrete method that returns a property's size in square feet
+     * @return      a string representing the total square feet of a house
+     */
     public String propertySquareFootage() {
        return String.format("Square feet: %s", getSquareFeet());
     }
 
     /**
      * Returns the amount of money to be paid each month towards the property's mortgage.
-     *
      * @param  principal    the outstanding balance owed on the house
      * @param  loanInYears  the length of the loan in years
      * @param  interest     the interest rate
-     *
      * @return      the monthly mortgage payment
      */
     protected final double mortgagePayment(int principal, int loanInYears, double interest) {
@@ -77,13 +73,11 @@ public abstract class InvestmentProperty {
     /**
      * Returns the Net Operating Income (NOI) of a property which is the
      * Gross Operating Income (GOI) minus any taxes, maintenance, and insurance, etc...
-     *
      * @param  grossIncome  the top line revenue of the investment
      * @param  taxes        the amount of money paid to the IRS
      * @param  maintenance  any repair costs for the property
      * @param  insurance    the money spent to insure a property
      * @param  utilities    the cost of water, gas, electric for the property
-     *
      * @return      the Net Operating Income (NOI) for a property
      */
     protected final double netOperatingIncome(double grossIncome, double taxes, double maintenance,
@@ -95,16 +89,12 @@ public abstract class InvestmentProperty {
     /**
      * Returns the capitalization by taking the Net Operating Income (NOI)
      * and dividing it by the property's value.
-     *
      * @param  noi  the net operating income (NOI)
      * @param  marketValue  the current value of the home if it were to be sold today
-     *
      * @return      the capitalization rate (cap rate) for a property
      */
-    protected final double capitalizationRate(double noi, double marketValue){
-
-        // return the value as a percentage so multiply by 100
-        return (noi / marketValue) * 100;
+    protected final double capitalizationRate(double noi, double marketValue) {
+        return (noi / marketValue) * 100;  // return the value as a percentage so multiply by 100
     }
 
 

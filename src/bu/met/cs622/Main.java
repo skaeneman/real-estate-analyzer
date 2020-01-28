@@ -16,15 +16,23 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<String> propertyReport;
+        double propertyPrice;
+        String propertyType;
 
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Enter type of investment property:");
-        String propertyType = input.nextLine();
+        System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
+        propertyType = input.nextLine();
 
-        System.out.println("Enter price of investment property:");
-        double propertyPrice = input.nextDouble();
+        // ensure input is valid
+        if (propertyType.equals("m") || propertyType.equals("s")) {
+            System.out.println("Enter price of investment property:");
+            propertyPrice = input.nextDouble();
+        } else {
+            System.out.println("Sorry that was not a valid choice.  Program ending.");
+            System.exit(0);
+        }
 
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
@@ -42,10 +50,16 @@ public class Main {
         }
         else if (propertyType.equals("s")) {
             // downcast
-//            InvestmentProperty singleFamProp = new SingleFamilyProperty(4.5, 3500);
-//            if (singleFamProp instanceof SingleFamilyProperty) {
-//                propertyReport = ((SingleFamilyProperty) singleFamProp).analyzeSingleFamilyProperty((SingleFamilyProperty) singleFamProp);
-//            }
+            InvestmentProperty singleFamProp = new SingleFamilyProperty(3.9, 3230, 400000,
+                                                                        20, 12550, 12200,
+                                                                        1456, 5600, 950000,
+                                                                        75000);
+
+            if (singleFamProp instanceof SingleFamilyProperty) {
+                propertyReport = ((SingleFamilyProperty) singleFamProp).analyzeSingleFamilyProperty((SingleFamilyProperty) singleFamProp);
+                ((SingleFamilyProperty) singleFamProp).display(propertyReport);
+                System.out.println(singleFamProp.propertySquareFootage());
+            }
         }
 
     } //main
