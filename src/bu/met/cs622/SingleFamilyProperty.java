@@ -63,7 +63,6 @@ public class SingleFamilyProperty extends InvestmentProperty {
         return propertyAnalysisOutput;
     }
 
-
     /**
      * Implement the abstract method inherited from the parent class to display output
      * @param  propertyAnalysis    an ArrayList of strings that describe the property
@@ -76,7 +75,6 @@ public class SingleFamilyProperty extends InvestmentProperty {
         }
         System.out.println("***************************************************************");
     }
-
 
 
 }
