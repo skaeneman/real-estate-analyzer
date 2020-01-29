@@ -28,6 +28,11 @@ class MultiFamilyPropertyTest {
         assertEquals(4.7, interestRate);
     }
 
-
+    @Test
+    public void setInterestRate() {
+        multi.setInterestRate(3.8);
+        double interestRate = multi.getInterestRate();
+        assertEquals(3.8, interestRate);
+    }
 
 }
