@@ -48,7 +48,8 @@ public class Main {
                                                                       90000);
 
             if (multiFamProp instanceof MultiFamilyProperty) {
-                propertyReport = ((MultiFamilyProperty) multiFamProp).analyzeMultiFamilyProperty((MultiFamilyProperty) multiFamProp);
+                propertyReport =
+                        ((MultiFamilyProperty) multiFamProp).analyzeMultiFamilyProperty((MultiFamilyProperty) multiFamProp);
                 ((MultiFamilyProperty) multiFamProp).display(propertyReport);
                 System.out.println(multiFamProp.propertySquareFootage());
             }
