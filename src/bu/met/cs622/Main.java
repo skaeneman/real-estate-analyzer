@@ -9,14 +9,42 @@ package bu.met.cs622;
  * @since   2020-22-01
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<String> propertyReport;
+//        ArrayList<String> propertyReport;
         double propertyPrice;
+        String propertyType = null;
+
+        // TODO: Create a try\catch block to test user input
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter 1 for manual input mode or 2 to load data from a file.");
+        int userInput = in.nextInt();
+
+        switch (userInput) {
+            case 1:
+                getUserKeyboardInput();
+                break;
+            case 2:
+                try{
+                    getUserFileInput();
+                    break;
+                } catch(FileNotFoundException ex) {
+                    System.err.println("Cannot open file...");
+                    System.exit(0);
+                }
+        }
+
+    } //main
+
+    //TODO: write JUnit test
+    public static void getUserKeyboardInput() {
+        ArrayList<String> propertyReport;
         String propertyType;
 
         // get user input from Scanner
@@ -24,18 +52,19 @@ public class Main {
 
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine();
+        propertyType = propertyType.trim();
 
         // ensure input is valid
         if (propertyType.equals("m") || propertyType.equals("s")) {
             try {
                 System.out.println("Enter price of investment property:");
-                propertyPrice = Integer.valueOf(input.nextLine());
+                Integer propertyPrice = Integer.valueOf(input.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Not a valid number exiting...");
+                System.err.println("Not a valid number. exiting program...");
                 System.exit(0);
             }
         } else {
-            System.out.println("Sorry that was not a valid choice.  Program ending.");
+            System.err.println("Sorry that was not a valid choice.  Program ending.");
             System.exit(0);
         }
 
@@ -43,9 +72,9 @@ public class Main {
         if (propertyType.equals("m")) {
             // downcast
             InvestmentProperty multiFamProp = new MultiFamilyProperty(4.7, 3000, 300000,
-                                                                      30, 1200, 15000,
-                                                                      1200, 6000, 850000,
-                                                                      90000);
+                    30, 1200, 15000,
+                    1200, 6000, 850000,
+                    90000);
 
             if (multiFamProp instanceof MultiFamilyProperty) {
                 propertyReport =
@@ -57,9 +86,9 @@ public class Main {
         else if (propertyType.equals("s")) {
             // downcast
             InvestmentProperty singleFamProp = new SingleFamilyProperty(3.9, 3230, 400000,
-                                                                        20, 12550, 12200,
-                                                                        1456, 5600, 950000,
-                                                                        75000);
+                    20, 12550, 12200,
+                    1456, 5600, 950000,
+                    75000);
 
             if (singleFamProp instanceof SingleFamilyProperty) {
                 propertyReport = ((SingleFamilyProperty) singleFamProp).analyzeSingleFamilyProperty((SingleFamilyProperty) singleFamProp);
@@ -67,6 +96,27 @@ public class Main {
                 System.out.println(singleFamProp.propertySquareFootage());
             }
         }
+        input.close();
+    }
 
-    } //main
-}
+
+    // TODO: Remove pathname /Users/scott/Desktop/testInput.txt
+    // TODO: write JUnit test
+    public static void getUserFileInput() throws FileNotFoundException {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter full path including filename (e.g. /Users/scott/myFile.txt):");
+        String userInputPath = in.nextLine();
+        Scanner infile = new Scanner(new File(userInputPath.trim()));
+
+        while (infile.hasNext())
+        {
+            System.out.printf("%s%n",
+                    infile.nextLine());
+        //          infile.next());
+
+        }
+        infile.close();
+    }
+
+
+}// class
