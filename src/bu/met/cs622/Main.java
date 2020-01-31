@@ -21,24 +21,30 @@ public class Main {
         double propertyPrice;
         String propertyType = null;
 
-        // TODO: Create a try\catch block to test user input
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter 1 for manual input mode or 2 to load data from a file.");
         int userInput = in.nextInt();
 
-        switch (userInput) {
-            case 1:
-                getUserKeyboardInput();
-                break;
-            case 2:
-                try{
-                    getUserFileInput();
+        try {
+            switch (userInput) {
+                case 1:
+                    getUserKeyboardInput();
                     break;
-                } catch(FileNotFoundException ex) {
-                    System.err.println("Cannot open file...");
-                    System.exit(0);
-                }
+                case 2:
+                    try {
+                        getUserFileInput();
+                        break;
+                    } catch(FileNotFoundException ex) {
+                        System.err.println("Cannot open file...");
+                        System.exit(0);
+                    }
+            }
         }
+        catch (Exception ex) {
+            System.err.println("User input error...");
+            ex.printStackTrace();
+        }
+
 
     } //main
 
