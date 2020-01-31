@@ -12,6 +12,7 @@ package bu.met.cs622;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -23,25 +24,22 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter 1 for manual input mode or 2 to load data from a file.");
-        int userInput = in.nextInt();
-
         try {
+            String userInput = in.next();
+
             switch (userInput) {
-                case 1:
+                case "1":
                     getUserKeyboardInput();
                     break;
-                case 2:
-                    try {
-                        getUserFileInput();
-                        break;
-                    } catch(FileNotFoundException ex) {
-                        System.err.println("Cannot open file...");
-                        System.exit(0);
-                    }
+                case "2":
+                    getUserFileInput();
+                    break;
+                default:
+                    System.err.printf("%s is not a valid option", userInput);
             }
         }
         catch (Exception ex) {
-            System.err.println("User input error...");
+            System.err.printf("User input error...%s", ex.getMessage());
             ex.printStackTrace();
         }
 
@@ -108,20 +106,26 @@ public class Main {
 
     // TODO: Remove pathname /Users/scott/Desktop/testInput.txt
     // TODO: write JUnit test
-    public static void getUserFileInput() throws FileNotFoundException {
+    public static void getUserFileInput() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter full path including filename (e.g. /Users/scott/myFile.txt):");
         String userInputPath = in.nextLine();
-        Scanner infile = new Scanner(new File(userInputPath.trim()));
+        try{
+           Scanner infile = new Scanner(new File(userInputPath.trim()));
 
-        while (infile.hasNext())
-        {
-            System.out.printf("%s%n",
-                    infile.nextLine());
-        //          infile.next());
+            while (infile.hasNext())
+            {
+                System.out.printf("%s%n",
+                        infile.nextLine());
+                //          infile.next());
 
+            }
+            infile.close();
+        } catch(FileNotFoundException e) {
+            System.err.printf("Cannot open file: %s ", userInputPath.trim());
+            System.exit(0);
         }
-        infile.close();
+        in.close();
     }
 
 
