@@ -79,7 +79,6 @@ public class MultiFamilyProperty extends InvestmentProperty {
     /**
      * Implement the abstract method inherited from the parent class to display output
      * @param  propertyAnalysis    an ArrayList of strings that describe the property
-     * @return                     nothing
      */
     public void display(ArrayList<String> propertyAnalysis) {
         System.out.println("********************* Multi-Family Analysis *******************");
@@ -92,7 +91,6 @@ public class MultiFamilyProperty extends InvestmentProperty {
     /**
      * Implements abstract method inherited from the parent and outputs results to a file
      * @param  propertyAnalysis    an ArrayList of strings that describe the property
-     * @return                     nothing
      */
     public void print(ArrayList<String> propertyAnalysis, String filePath) {
         Formatter outfile = null;

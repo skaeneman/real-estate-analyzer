@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -50,7 +51,7 @@ public class Main {
     public static void getUserKeyboardInput() throws Exception {
         ArrayList<String> propertyReport;
         String propertyType;
-        String filePath = null;
+        HashMap<Boolean, String> wantsToPrint = null;
 
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
@@ -64,7 +65,7 @@ public class Main {
             try {
                 System.out.println("Enter price of investment property:");
                 Integer propertyPrice = Integer.valueOf(input.nextLine());
-                filePath = getPrintResponse();
+                wantsToPrint = getPrintResponse();  // check if user wants to print
 
             } catch (NumberFormatException e) {
                 System.err.println("Not a valid number. exiting program...");
@@ -93,11 +94,14 @@ public class Main {
                         ((MultiFamilyProperty) multiFamProp).analyzeMultiFamilyProperty((MultiFamilyProperty) multiFamProp);
                 ((MultiFamilyProperty) multiFamProp).display(propertyReport);
 
-                // print the report if the filepath is not null
-                if (filePath != null && !filePath.isEmpty())  {
-                    ((MultiFamilyProperty) multiFamProp).print(propertyReport, filePath);
+                // print the report if the HashMap key is set to true
+                if (wantsToPrint.containsKey(true)) {
+                    String filePathToPrint = wantsToPrint.get(true); // get the file path from the key\value pair
+                    if (filePathToPrint != null && !filePathToPrint.isEmpty())  {
+                        ((MultiFamilyProperty) multiFamProp).print(propertyReport, filePathToPrint);
+                    }
                 }
-
+                // output property square feet
                 System.out.println(multiFamProp.propertySquareFootage());
             }
         }
@@ -143,24 +147,33 @@ public class Main {
         in.close();
     }
 
-    // TODO: write method description. returns the filePath or null to the caller
-    public static String getPrintResponse() throws Exception {
+    /**
+     * Determines if the user wants to print the results to a file
+     * @return      a HashMap of true/filePath if they want to print, or false\null
+     */
+    public static HashMap<Boolean, String> getPrintResponse() throws Exception {
         String filePath = null;
+        String print;
+
+        // create a HashMap that will hold the valued returned to the caller
+        HashMap<Boolean, String> printMap = new HashMap<Boolean, String>();
 
         Scanner in = new Scanner(System.in);
 
-        // print to a file if selected to do so
         System.out.println("Write output to file (yes/no):");
-        String print = in.nextLine();
+        print = in.nextLine();
 
-        //TODO:  Add try\catch and check for invalid input
+        // print to a file if user has selected to do so
         if ((print.equalsIgnoreCase("yes")) || (print.equalsIgnoreCase("y"))) {
             System.out.println("Enter file path and file name to generate output (e.g. C:\\report.txt)");
             filePath = in.nextLine();
+            printMap.put(true, filePath);  // user wants to print so store the file path
+        } else {
+            // user does not want to print the results
+            printMap.put(false, null);
         }
-        return filePath; // return the filePath of null to the caller
+        return printMap; // return the HashMap to the caller
     }
-
 
 
 }// class
