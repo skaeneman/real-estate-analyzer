@@ -107,46 +107,5 @@ public abstract class InvestmentProperty {
         return (noi / marketValue) * 100;  // return the value as a percentage so multiply by 100
     }
 
-//    //TODO: Unit test
-//    /**
-//     * Implements abstract method inherited from the parent and outputs results to a file
-//     * @param  propertyAnalysis    an ArrayList of strings that describe the property
-//     */
-//    public void print(ArrayList<String> propertyAnalysis, String filePath) {
-//        Formatter outfile = null;
-//
-//        // get the current date and time and format it
-//        LocalDateTime time = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        String formatDateTime = time.format(formatter);
-//
-//        // try and write to an output file
-//        try {
-//            outfile = new Formatter(filePath); // open file
-//            outfile.format("********** report timestamp %s **********%n", formatDateTime);
-//
-//            // loop through items and add them to the report
-//            for (String prop : propertyAnalysis) {
-//                outfile.format("%s%n", prop);
-//            }
-//
-//            // check if the file was successfully written to
-//            Path path = Paths.get(filePath);
-//            boolean pathExists = Files.exists(path);
-//
-//            //TODO:  Fix this
-//            System.out.printf("TEST pathExists %s", pathExists);
-//            if (pathExists) {
-//                System.out.println("File successfully written to");
-//            } else {
-//                System.err.print("Could not write to file.  Check that the path was correct...");
-//            }
-//        }
-//        catch (FileNotFoundException ex) {
-//            System.err.println("Cannot open file... quitting");
-//        }
-//        outfile.close();
-//    }
-
 
 }

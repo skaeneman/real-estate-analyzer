@@ -210,17 +210,17 @@ public class Main {
             // check if the file was successfully written to
             Path path = Paths.get(filePath);
             boolean pathExists = Files.exists(path);
+            File file = new File(String.valueOf(path));
 
-            //TODO:  Fix this
-            System.out.printf("TEST pathExists %s", pathExists);
             if (pathExists) {
-                System.out.println("File successfully written to");
+                System.out.printf("%nFile successfully written to: %s%n", file.getAbsolutePath());
             } else {
                 System.err.print("Could not write to file.  Check that the path was correct...");
             }
         }
         catch (FileNotFoundException ex) {
-            System.err.println("Cannot open file... quitting");
+            System.err.printf("Uh-oh cannot write to file path: %s ...exiting", filePath);
+            System.exit(0);
         }
         outfile.close();
     }
