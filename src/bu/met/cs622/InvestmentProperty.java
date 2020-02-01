@@ -44,7 +44,7 @@ public abstract class InvestmentProperty {
     public abstract void display(ArrayList<String> propertyAnalysis);
 
     // prints results from the investment analysis of a property.
-    public abstract void print(ArrayList<String> propertyAnalysis);
+    public abstract void print(ArrayList<String> propertyAnalysis, String filePath);
 
     // banks adjust interest rates by property type (primary residence, second home, solely an investment, etc...)
     public abstract void mortgageInterestRate();

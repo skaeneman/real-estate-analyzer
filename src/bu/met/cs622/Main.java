@@ -50,7 +50,7 @@ public class Main {
     public static void getUserKeyboardInput() throws Exception {
         ArrayList<String> propertyReport;
         String propertyType;
-        String outFile = null;
+        String filePath = null;
 
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
@@ -64,7 +64,7 @@ public class Main {
             try {
                 System.out.println("Enter price of investment property:");
                 Integer propertyPrice = Integer.valueOf(input.nextLine());
-                outFile = getPrintResponse();
+                filePath = getPrintResponse();
 
             } catch (NumberFormatException e) {
                 System.err.println("Not a valid number. exiting program...");
@@ -94,8 +94,8 @@ public class Main {
                 ((MultiFamilyProperty) multiFamProp).display(propertyReport);
 
                 // print the report if the filepath is not null
-                if (outFile != null && !outFile.isEmpty())  {
-                    ((MultiFamilyProperty) multiFamProp).print(propertyReport);
+                if (filePath != null && !filePath.isEmpty())  {
+                    ((MultiFamilyProperty) multiFamProp).print(propertyReport, filePath);
                 }
 
                 System.out.println(multiFamProp.propertySquareFootage());

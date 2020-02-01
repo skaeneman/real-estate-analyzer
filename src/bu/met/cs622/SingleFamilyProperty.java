@@ -77,7 +77,7 @@ public class SingleFamilyProperty extends InvestmentProperty {
     }
 
     @Override
-    public void print(ArrayList<String> propertyAnalysis) {
+    public void print(ArrayList<String> propertyAnalysis, String filePath) {
 
     }
 
