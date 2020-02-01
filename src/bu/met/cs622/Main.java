@@ -12,7 +12,13 @@ package bu.met.cs622;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -98,7 +104,7 @@ public class Main {
                 if (wantsToPrint.containsKey(true)) {
                     String filePathToPrint = wantsToPrint.get(true); // get the file path from the key\value pair
                     if (filePathToPrint != null && !filePathToPrint.isEmpty())  {
-                        ((MultiFamilyProperty) multiFamProp).print(propertyReport, filePathToPrint);
+                        print(propertyReport, filePathToPrint);
                     }
                 }
                 // output property square feet
@@ -175,5 +181,48 @@ public class Main {
         return printMap; // return the HashMap to the caller
     }
 
+    //TODO: Unit test
+    /**
+     * Prints the output of the property analysis to a file
+     * @param  propertyAnalysis    an ArrayList of strings that describe the property
+     */
+    public static void print(ArrayList<String> propertyAnalysis, String filePath) {
+        Formatter outfile = null;
+
+        // get the current date and time and format it
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatDateTime = time.format(formatter);
+
+        // try and write to an output file
+        try {
+            outfile = new Formatter(filePath); // open file
+            outfile.format("******************************************%n", formatDateTime);
+            outfile.format("Property Investment Report %n");
+            outfile.format("Timestamp: %s%n", formatDateTime);
+            outfile.format("******************************************%n%n", formatDateTime);
+
+            // loop through items and add them to the report
+            for (String prop : propertyAnalysis) {
+                outfile.format("%s%n", prop);
+            }
+
+            // check if the file was successfully written to
+            Path path = Paths.get(filePath);
+            boolean pathExists = Files.exists(path);
+
+            //TODO:  Fix this
+            System.out.printf("TEST pathExists %s", pathExists);
+            if (pathExists) {
+                System.out.println("File successfully written to");
+            } else {
+                System.err.print("Could not write to file.  Check that the path was correct...");
+            }
+        }
+        catch (FileNotFoundException ex) {
+            System.err.println("Cannot open file... quitting");
+        }
+        outfile.close();
+    }
 
 }// class
