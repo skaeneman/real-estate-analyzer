@@ -1,6 +1,8 @@
 package bu.met.cs622;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -91,9 +93,16 @@ public class MultiFamilyProperty extends InvestmentProperty {
      */
     public void print(ArrayList<String> propertyAnalysis) {
         Formatter outfile = null;
+        LocalDateTime time = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        String formatDateTime = time.format(formatter);
+
         try {
             outfile = new Formatter("/Users/scott/Desktop/testOutput.txt"); // open file
             for (String prop : propertyAnalysis) {
+                outfile.format("%s%n", formatDateTime);
                 outfile.format("%s%n", prop);
             }
         }
