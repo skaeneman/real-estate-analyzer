@@ -76,5 +76,10 @@ public class SingleFamilyProperty extends InvestmentProperty {
 //        System.out.println("***************************************************************");
     }
 
+    @Override
+    public void print(ArrayList<String> propertyAnalysis) {
+
+    }
+
 
 }

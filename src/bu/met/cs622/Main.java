@@ -11,13 +11,14 @@ package bu.met.cs622;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-//        ArrayList<String> propertyReport;
+//      ArrayList<String> propertyReport;
         double propertyPrice;
         String propertyType = null;
 
@@ -46,9 +47,10 @@ public class Main {
     } //main
 
     //TODO: write JUnit test
-    public static void getUserKeyboardInput() {
+    public static void getUserKeyboardInput() throws Exception {
         ArrayList<String> propertyReport;
         String propertyType;
+        String outFile = null;
 
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
@@ -62,15 +64,22 @@ public class Main {
             try {
                 System.out.println("Enter price of investment property:");
                 Integer propertyPrice = Integer.valueOf(input.nextLine());
+                outFile = getPrintResponse();
+
             } catch (NumberFormatException e) {
                 System.err.println("Not a valid number. exiting program...");
                 System.exit(0);
+            } catch (IOException ex) {
+                // catch the error thrown by getPrintResponse()
+                System.err.println("Filepath or file name not valid...");
+                ex.printStackTrace();
             }
         } else {
             System.err.println("Sorry that was not a valid choice.  Program ending.");
             System.exit(0);
         }
 
+        // TODO: Break this off into its own method
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
             // downcast
@@ -83,6 +92,12 @@ public class Main {
                 propertyReport =
                         ((MultiFamilyProperty) multiFamProp).analyzeMultiFamilyProperty((MultiFamilyProperty) multiFamProp);
                 ((MultiFamilyProperty) multiFamProp).display(propertyReport);
+
+                // print the report if the filepath is not null
+                if (outFile != null && !outFile.isEmpty())  {
+                    ((MultiFamilyProperty) multiFamProp).print(propertyReport);
+                }
+
                 System.out.println(multiFamProp.propertySquareFootage());
             }
         }
@@ -109,6 +124,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter full path including filename (e.g. /Users/scott/myFile.txt):");
         String userInputPath = in.nextLine();
+
         try{
            Scanner infile = new Scanner(new File(userInputPath.trim()));
 
@@ -126,6 +142,25 @@ public class Main {
         }
         in.close();
     }
+
+    // TODO: write method description. returns the filePath or null to the caller
+    public static String getPrintResponse() throws Exception {
+        String filePath = null;
+
+        Scanner in = new Scanner(System.in);
+
+        // print to a file if selected to do so
+        System.out.println("Write output to file (yes/no):");
+        String print = in.nextLine();
+
+        //TODO:  Add try\catch and check for invalid input
+        if ((print.equalsIgnoreCase("yes")) || (print.equalsIgnoreCase("y"))) {
+            System.out.println("Enter file path and file name to generate output (e.g. C:\\report.txt)");
+            filePath = in.nextLine();
+        }
+        return filePath; // return the filePath of null to the caller
+    }
+
 
 
 }// class

@@ -1,6 +1,8 @@
 package bu.met.cs622;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Formatter;
 
 public class MultiFamilyProperty extends InvestmentProperty {
 
@@ -80,6 +82,27 @@ public class MultiFamilyProperty extends InvestmentProperty {
             System.out.println(prop);
         }
 //        System.out.println("***************************************************************");
+    }
+
+    /**
+     * Implements abstract method inherited from the parent and outputs results to a file
+     * @param  propertyAnalysis    an ArrayList of strings that describe the property
+     * @return                     nothing
+     */
+    public void print(ArrayList<String> propertyAnalysis) {
+        Formatter outfile = null;
+        try {
+            outfile = new Formatter("/Users/scott/Desktop/testOutput.txt"); // open file
+            for (String prop : propertyAnalysis) {
+                outfile.format("%s%n", prop);
+            }
+        }
+        catch (FileNotFoundException ex)
+        {
+            System.err.println("Cannot open file ... quitting");
+        }
+
+        outfile.close();
     }
 
 }//class
