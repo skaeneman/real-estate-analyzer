@@ -74,12 +74,9 @@ public class Main {
                 wantsToPrint = getPrintResponse();  // check if user wants to print
 
             } catch (NumberFormatException e) {
-                System.err.println("Not a valid number. exiting program...");
+                System.err.printf("error: Not a valid number %s. %nexiting program...", e.getMessage());
+                e.printStackTrace();
                 System.exit(0);
-            } catch (IOException ex) {
-                // catch the error thrown by getPrintResponse()
-                System.err.println("Filepath or file name not valid...");
-                ex.printStackTrace();
             }
         } else {
             System.err.println("Sorry that was not a valid choice.  Program ending.");
@@ -153,11 +150,12 @@ public class Main {
         in.close();
     }
 
+    //TODO: Unit test
     /**
      * Determines if the user wants to print the results to a file
      * @return      a HashMap of true/filePath if they want to print, or false\null
      */
-    public static HashMap<Boolean, String> getPrintResponse() throws Exception {
+    public static HashMap<Boolean, String> getPrintResponse() {
         String filePath = null;
         String print;
 
