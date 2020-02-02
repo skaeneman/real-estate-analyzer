@@ -11,7 +11,6 @@ package bu.met.cs622;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -88,8 +87,10 @@ public class Main {
         if (propertyType.equals("m")) {
 
 
-            Zillow zillowTest = new Zillow();
-            zillowTest.getZillowData();
+            YelpAPI yelpAPITest = new YelpAPI();
+            yelpAPITest.getYelpData();
+            System.out.println(" ");
+
 
 
             // downcast
