@@ -158,7 +158,6 @@ public class Main {
         in.close();
     }
 
-    //TODO: Unit test
     /**
      * Determines if the user wants to print the results to a file
      * @return      a HashMap of true/filePath if they want to print, or false\null
@@ -187,7 +186,6 @@ public class Main {
         return printMap; // return the HashMap to the caller
     }
 
-    //TODO: Unit test
     /**
      * Prints the output of the property analysis to a file
      * @param  propertyAnalysis    an ArrayList of strings that describe the property

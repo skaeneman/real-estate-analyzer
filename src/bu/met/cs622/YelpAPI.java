@@ -48,7 +48,7 @@ public class YelpAPI {
                 responseContent.append(line);
             }
             reader.close();
-            System.out.println(responseContent.toString());
+//            System.out.println(responseContent.toString());
         }
         catch (IOException e) {
             System.err.printf("Error:... %s", e.getMessage());
