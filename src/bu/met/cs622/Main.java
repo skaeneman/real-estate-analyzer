@@ -88,7 +88,8 @@ public class Main {
 
 
             YelpAPI yelpAPITest = new YelpAPI();
-            yelpAPITest.getYelpData();
+            Object output = yelpAPITest.getYelpData();
+            System.out.println(output);
             System.out.println(" ");
 
 

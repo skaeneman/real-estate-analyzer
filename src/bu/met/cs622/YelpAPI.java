@@ -13,13 +13,13 @@ public class YelpAPI {
     String apiBlankSpace = " "; // blank space needed after "Bearer" and before the API key
 
 
-    public void getYelpData() throws IOException {
+    public Object getYelpData() throws IOException {
         BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
 
         try {
-            URL url = new URL("https://api.yelp.com/v3/businesses/search?location=Boston,MA");
+            URL url = new URL("https://api.yelp.com/v3/businesses/search?location=Gosnold,MA");
 
             connection = (HttpURLConnection) url.openConnection();
 
@@ -49,6 +49,7 @@ public class YelpAPI {
             System.err.printf("Error:... %s", e.getMessage());
             e.printStackTrace();
         }
+        return responseContent.toString();
     }
 
 }
