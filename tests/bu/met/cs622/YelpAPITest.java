@@ -8,6 +8,7 @@ class YelpAPITest {
 
     private Assertions JSONAssert;
 
+    // connect to the Yelp Fusion API and retrieve JSON data
     @Test
     void getYelpDataTest() throws IOException {
 

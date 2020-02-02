@@ -7,6 +7,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
+/**
+ * Connects to the Yelp Fusion API to serach business reviews and locations
+ * @param
+ * @return
+ */
 public class YelpAPI {
     private static HttpURLConnection connection;
     String apiKey = "J52kztJ0A-Ylge8QDPDooqbBbchhtxQfi5hjigcFFowq61CIjWJlmxkh0o03blry5Xw8pSTcMcWAVCwVD1XliCisuvoeA7JXP_LRWYKWJTNGC6LnKXJTvbvfXRU3XnYx";
