@@ -86,6 +86,12 @@ public class Main {
         // TODO: Break this off into its own method
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
+
+
+            Zillow zillowTest = new Zillow();
+            zillowTest.getZillowData();
+
+
             // downcast
             InvestmentProperty multiFamProp = new MultiFamilyProperty(4.7, 3000, 300000,
                     30, 1200, 15000,
