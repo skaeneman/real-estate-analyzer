@@ -52,7 +52,6 @@ public class Main {
 
     } //main
 
-    //TODO: write JUnit test
     public static void getUserKeyboardInput() throws Exception {
         ArrayList<String> propertyReport;
         String propertyType;
@@ -85,15 +84,6 @@ public class Main {
         // TODO: Break this off into its own method
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
-
-
-            YelpAPI yelpAPITest = new YelpAPI();
-            Object output = yelpAPITest.getYelpData();
-            System.out.println(output);
-            System.out.println(" ");
-
-
-
             // downcast
             InvestmentProperty multiFamProp = new MultiFamilyProperty(4.7, 3000, 300000,
                     30, 1200, 15000,
@@ -114,6 +104,11 @@ public class Main {
                 }
                 // output property square feet
                 System.out.println(multiFamProp.propertySquareFootage());
+
+                // get data from yelp API
+                YelpAPI yelpAPITest = new YelpAPI();
+                Object yelpOutput = yelpAPITest.getYelpData();
+                System.out.printf("Printing output from Yelp API in JSON format...%n%s", yelpOutput);
             }
         }
         else if (propertyType.equals("s")) {
@@ -127,6 +122,19 @@ public class Main {
                 propertyReport = ((SingleFamilyProperty) singleFamProp).analyzeSingleFamilyProperty((SingleFamilyProperty) singleFamProp);
                 ((SingleFamilyProperty) singleFamProp).display(propertyReport);
                 System.out.println(singleFamProp.propertySquareFootage());
+
+                // print the report if the HashMap key is set to true
+                if (wantsToPrint.containsKey(true)) {
+                    String filePathToPrint = wantsToPrint.get(true); // get the file path from the key\value pair
+                    if (filePathToPrint != null && !filePathToPrint.isEmpty())  {
+                        print(propertyReport, filePathToPrint);
+                    }
+                }
+
+                // get data from yelp API
+                YelpAPI yelpAPITest = new YelpAPI();
+                Object yelpOutput = yelpAPITest.getYelpData();
+                System.out.printf("Printing output from Yelp API in JSON format...%n%s", yelpOutput);
             }
         }
         input.close();
@@ -134,7 +142,6 @@ public class Main {
 
 
     // TODO: Remove pathname /Users/scott/Desktop/testInput.txt
-    // TODO: write JUnit test
     public static void getUserFileInput() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter full path including filename (e.g. /Users/scott/myFile.txt):");
@@ -145,10 +152,8 @@ public class Main {
 
             while (infile.hasNext())
             {
-                System.out.printf("%s%n",
-                        infile.nextLine());
+                System.out.printf("%s%n", infile.nextLine());
                 //          infile.next());
-
             }
             infile.close();
         } catch(FileNotFoundException e) {
@@ -219,7 +224,7 @@ public class Main {
             if (pathExists) {
                 System.out.printf("%nFile successfully written to: %s%n", file.getAbsolutePath());
             } else {
-                System.err.print("Could not write to file.  Check that the path was correct...");
+                System.err.print("Could not write to file.  Check that the path is correct...");
             }
         }
         catch (FileNotFoundException ex) {
