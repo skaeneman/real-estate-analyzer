@@ -81,7 +81,6 @@ public class Main {
             System.exit(0);
         }
 
-        // TODO: Break this off into its own method
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
             // downcast
@@ -95,6 +94,8 @@ public class Main {
                         ((MultiFamilyProperty) multiFamProp).analyzeMultiFamilyProperty((MultiFamilyProperty) multiFamProp);
                 ((MultiFamilyProperty) multiFamProp).display(propertyReport);
 
+                // output property square feet
+                System.out.println(multiFamProp.propertySquareFootage());
                 // print the report if the HashMap key is set to true
                 if (wantsToPrint.containsKey(true)) {
                     String filePathToPrint = wantsToPrint.get(true); // get the file path from the key\value pair
@@ -102,13 +103,11 @@ public class Main {
                         print(propertyReport, filePathToPrint);
                     }
                 }
-                // output property square feet
-                System.out.println(multiFamProp.propertySquareFootage());
 
                 // get data from yelp API
                 YelpAPI yelpAPITest = new YelpAPI();
                 Object yelpOutput = yelpAPITest.getYelpData();
-                System.out.printf("Printing output from Yelp API in JSON format...%n%s", yelpOutput);
+                System.out.printf("Fetching data from Yelp API in JSON format...%n%s", yelpOutput);
             }
         }
         else if (propertyType.equals("s")) {
@@ -134,7 +133,7 @@ public class Main {
                 // get data from yelp API
                 YelpAPI yelpAPITest = new YelpAPI();
                 Object yelpOutput = yelpAPITest.getYelpData();
-                System.out.printf("Printing output from Yelp API in JSON format...%n%s", yelpOutput);
+                System.out.printf("Fetching data from Yelp API in JSON format...%n%s", yelpOutput);
             }
         }
         input.close();
@@ -222,7 +221,7 @@ public class Main {
             File file = new File(String.valueOf(path));
 
             if (pathExists) {
-                System.out.printf("%nFile successfully written to: %s%n", file.getAbsolutePath());
+                System.out.printf("File successfully written to: %s%n", file.getAbsolutePath());
             } else {
                 System.err.print("Could not write to file.  Check that the path is correct...");
             }
