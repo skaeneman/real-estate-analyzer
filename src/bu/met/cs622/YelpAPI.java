@@ -7,24 +7,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-/**
- * Connects to the Yelp Fusion API to serach business reviews and locations
- * @param
- * @return
- */
 public class YelpAPI {
+
     private static HttpURLConnection connection;
     String apiKey = "J52kztJ0A-Ylge8QDPDooqbBbchhtxQfi5hjigcFFowq61CIjWJlmxkh0o03blry5Xw8pSTcMcWAVCwVD1XliCisuvoeA7JXP_LRWYKWJTNGC6LnKXJTvbvfXRU3XnYx";
     String apiBlankSpace = " "; // blank space needed after "Bearer" and before the API key
 
-
-    public Object getYelpData() throws IOException {
+    /**
+     * Connects to the Yelp Fusion API to serach business reviews and locations
+     * @param city      the city the business is located in
+     * @param state     the state the business is located in
+     * @return          data about businesses in the selected city\state in json format
+     */
+    public Object getYelpData(String city, String state) throws IOException {
         BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
 
         try {
-            URL url = new URL("https://api.yelp.com/v3/businesses/search?location=Gosnold,MA");
+            URL url = new URL("https://api.yelp.com/v3/businesses/search?location="+city+","+state);
 
             connection = (HttpURLConnection) url.openConnection();
 

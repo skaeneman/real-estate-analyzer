@@ -106,7 +106,7 @@ public class Main {
 
                 // get data from yelp API
                 YelpAPI yelpAPITest = new YelpAPI();
-                Object yelpOutput = yelpAPITest.getYelpData();
+                Object yelpOutput = yelpAPITest.getYelpData("Boston", "MA");
                 System.out.printf("Fetching data from Yelp API in JSON format...%n%s", yelpOutput);
             }
         }
@@ -132,7 +132,7 @@ public class Main {
 
                 // get data from yelp API
                 YelpAPI yelpAPITest = new YelpAPI();
-                Object yelpOutput = yelpAPITest.getYelpData();
+                Object yelpOutput = yelpAPITest.getYelpData("Boston", "MA");
                 System.out.printf("Fetching data from Yelp API in JSON format...%n%s", yelpOutput);
             }
         }
