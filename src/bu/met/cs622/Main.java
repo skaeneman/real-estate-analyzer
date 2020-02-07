@@ -60,6 +60,13 @@ public class Main {
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
 
+
+        GenericStack<String> s = new GenericStack<>();
+        s.push("testing....");
+        System.out.printf("this is the top of the stack... %s", s.peek());
+
+
+
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine();
         propertyType = propertyType.trim();
