@@ -62,9 +62,13 @@ public class Main {
 
 
         GenericStack<String> s = new GenericStack<>();
-        s.push("testing....");
-        System.out.printf("this is the top of the stack... %s", s.peek());
+        s.push("first");
+//        s.push("second");
 
+        System.out.printf("this is the top of the stack... %s", s.peek());
+        s.pop();
+        System.out.printf("stack after pop... %s", s.peek());
+        s.stackSize();
 
 
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");

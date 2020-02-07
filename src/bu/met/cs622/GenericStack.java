@@ -23,11 +23,35 @@ public class GenericStack<T> {
     }
 
     /**
+     * removes an element from the generic stack
+     * @return  the LIFO object
+     */
+    public T pop() {
+        int stackSize = stackArray.size();
+        if (stackSize == 0) {
+            return null; // the stack is already empty
+        } else {
+            // remove the last element to be added to the stack
+            return stackArray.remove(stackArray.size() - 1);
+        }
+    }
+
+    /**
      * gets the last item that was added to the top of the generic stack
      * @return  the LIFO object
      */
     public T peek() {
-        return stackArray.get(stackArray.size()-1);
+        T lastStackElement = null;
+        try {
+            lastStackElement = stackArray.get(stackArray.size() - 1);
+            System.out.printf("lastStackElement... ", lastStackElement);
+            if (lastStackElement != null)
+                return lastStackElement;
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.printf("Stack is empty ", e.getMessage());
+        }
+           return lastStackElement;
     }
 
     /**
