@@ -19,7 +19,7 @@ public class YelpAPI {
      * @param state     the state the business is located in
      * @return          data about businesses in the selected city\state in json format
      */
-    public Object getYelpData(String city, String state) throws IOException {
+    public String getYelpData(String city, String state) throws IOException {
         BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
