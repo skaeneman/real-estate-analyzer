@@ -30,4 +30,25 @@ class GenericStackTest {
         assertEquals("third", peekABoo);
     }
 
+    @Test
+    void pop() {
+        GenericStack<String> genStack = new GenericStack<>();
+        genStack.push("first item");
+        genStack.push("second item");
+        assertEquals(2, genStack.stackSize());
+
+        genStack.pop();
+        assertEquals(1, genStack.stackSize());
+
+        genStack.pop();
+        assertEquals(0, genStack.stackSize());
+    }
+
+    @Test
+    void stackSize() {
+        GenericStack<String> genStack = new GenericStack<>();
+        genStack.push("first item");
+        assertEquals(1, genStack.stackSize());
+    }
+
 }

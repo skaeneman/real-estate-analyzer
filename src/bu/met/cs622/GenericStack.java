@@ -18,13 +18,12 @@ public class GenericStack<T> {
      * @return  the LIFO object
      */
     public void push(T item) {
-//        System.out.println("adding to stack... " + item);
         stackArray.add(item);
     }
 
     /**
      * removes an element from the generic stack
-     * @return  the LIFO object
+     * @return  the LIFO element if the stack is not empty
      */
     public T pop() {
         int stackSize = stackArray.size();
@@ -37,21 +36,16 @@ public class GenericStack<T> {
     }
 
     /**
-     * gets the last item that was added to the top of the generic stack
-     * @return  the LIFO object
+     * returns the last item that was added to the top of the generic stack
+     * @return  the LIFO element or null if the stack is empty
      */
     public T peek() {
         T lastStackElement = null;
-        try {
+        int stackSize = stackArray.size();
+        if (stackSize > 0) {
             lastStackElement = stackArray.get(stackArray.size() - 1);
-            System.out.printf("lastStackElement... ", lastStackElement);
-            if (lastStackElement != null)
-                return lastStackElement;
         }
-        catch (IndexOutOfBoundsException e) {
-            System.out.printf("Stack is empty ", e.getMessage());
-        }
-           return lastStackElement;
+        return lastStackElement;
     }
 
     /**

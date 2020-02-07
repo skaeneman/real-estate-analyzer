@@ -63,7 +63,7 @@ public class Main {
 
         GenericStack<String> s = new GenericStack<>();
         s.push("first");
-//        s.push("second");
+        s.push("second");
 
         System.out.printf("this is the top of the stack... %s", s.peek());
         s.pop();
