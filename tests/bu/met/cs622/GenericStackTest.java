@@ -6,14 +6,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenericStackTest {
 
-    GenericStack<String> genStack = new GenericStack<>();
 
     @Test
     void push() {
+        GenericStack<String> genStack = new GenericStack<>();
+        genStack.push("one");
+        genStack.push("two");
+        genStack.push("three");
+
+        int size = genStack.stackSize();
+        assertEquals(3, size);
     }
 
     @Test
     void peek() {
+        GenericStack<String> genStack = new GenericStack<>();
+
         genStack.push("first");
         genStack.push("second");
         genStack.push("third");

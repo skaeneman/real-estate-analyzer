@@ -30,5 +30,12 @@ public class GenericStack<T> {
         return stackArray.get(stackArray.size()-1);
     }
 
+    /**
+     * gets the number of elements in the generic stack
+     * @return  a total count of all elements
+     */
+    public int stackSize() {
+        return stackArray.size();
+    }
 
 }
