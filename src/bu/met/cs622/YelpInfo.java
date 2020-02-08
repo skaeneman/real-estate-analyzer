@@ -18,6 +18,15 @@ public class YelpInfo {
 
     Double rating;
 
+    //nested class fields
+    String alias;
+    String title;
+
+
+    /** switch over to using 2 class files like this https://www.youtube.com/watch?v=4F1d6ELxF1c and a constructor */
+
+
+
 //    String address1;
 
 //    @SerializedName("displayAddress")
@@ -35,6 +44,12 @@ public class YelpInfo {
 //        return this.address1 = address1;
 //    }
 
+
+    // nested inner class for categories
+    public class YelpInfoCategories {
+            String alias;
+            String title;
+    }
 
 }
 
