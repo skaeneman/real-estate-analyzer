@@ -58,6 +58,8 @@ public class Main {
     public static void getUserKeyboardInput() throws Exception {
         ArrayList<String> propertyReport;
         String propertyType;
+        String propertyCity;
+        String propertyState;
         HashMap<Boolean, String> wantsToPrint = null;
 
         // get user input from Scanner
@@ -65,7 +67,15 @@ public class Main {
 
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine();
-        propertyType = propertyType.trim();
+        propertyType.trim();
+
+        System.out.println("Enter the CITY where the property is located: ");
+        propertyCity = input.nextLine();
+        propertyCity.trim();
+
+        System.out.println("Enter the STATE where the property is located: ");
+        propertyState = input.nextLine();
+        propertyState.trim();
 
         // ensure input is valid
         if (propertyType.equals("m") || propertyType.equals("s")) {
@@ -108,11 +118,8 @@ public class Main {
                 }
 
                 // get data from yelp API
-                YelpAPI yelpAPIData = new YelpAPI();
-                Object yelp = yelpAPIData.getYelpData("Boston", "MA");
-                System.out.printf("Fetching data from Yelp API in JSON format...%n%s", yelp);
-                getYelpData();
-
+                System.out.printf("Fetching data from Yelp API in JSON format...%n");
+                getYelpData(propertyCity, propertyState);
             }
         }
         else if (propertyType.equals("s")) {
@@ -136,10 +143,8 @@ public class Main {
                 }
 
                 // get data from yelp API
-                YelpAPI yelpAPITest = new YelpAPI();
-                Object yelpOutput = yelpAPITest.getYelpData("Boston", "MA");
-                System.out.printf("Fetching data from Yelp API in JSON format...%n%s", yelpOutput);
-            }
+                System.out.printf("Fetching data from Yelp API in JSON format...%n");
+                getYelpData(propertyCity, propertyState);            }
         }
         input.close();
     }
@@ -244,13 +249,13 @@ public class Main {
      * Processes data returned from the Yelp API.  Uses a generic stack class to
      * store the data returned from yelp.
      */
-    public static void getYelpData() throws IOException {
+    public static void getYelpData(String city, String state) throws IOException {
         // use googles gson library for handling json objects
         Gson gson = new Gson();
 
         // get data from yelp API
         YelpAPI yelpAPIData = new YelpAPI();
-        String yelp = yelpAPIData.getYelpData("Boston", "MA");
+        String yelp = yelpAPIData.getYelpData(city, state);
 
         // process the json data with gson
         YelpBusinesses jsonYelp =  gson.fromJson(yelp, YelpBusinesses.class);
@@ -261,16 +266,17 @@ public class Main {
 
         for (int i = 0; i < businesses.size(); i++) {
             // convert meters to miles
-            Double meters = businesses.get(i).distance;
+            Double meters = businesses.get(i).getDistance();
             double miles = meters * 0.00062137119;
 
             // push elements onto the generic stack
-            businessInfo.push("url: " + businesses.get(i).url);
+            businessInfo.push("url: " + businesses.get(i).getUrl());
             businessInfo.push("distance: " + miles + " miles");
-            businessInfo.push("business closed: " + businesses.get(i).isClosed);
-            businessInfo.push("rating: " + businesses.get(i).rating);
-            businessInfo.push(businesses.get(i).location.city + ", " + businesses.get(i).location.state + " " + businesses.get(i).location.zipCode);
-            businessInfo.push(businesses.get(i).name);
+            businessInfo.push("business closed: " + businesses.get(i).getClosed());
+            businessInfo.push("rating: " + businesses.get(i).getRating());
+            businessInfo.push(businesses.get(i).getLocation().getCity() + ", "
+                    + businesses.get(i).getLocation().getState() + " " + businesses.get(i).getLocation().getZipCode());
+            businessInfo.push(businesses.get(i).getName());
             businessInfo.push(" ");
         }
 
@@ -279,7 +285,6 @@ public class Main {
             String output = businessInfo.pop();
             System.out.println(output);
         }
-
     }
 
 

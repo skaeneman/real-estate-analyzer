@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/********************************************************************
- *  This class processes the "business" json data returned Yelps API
- ********************************************************************/
+/*************************************************************************
+ *  This class processes the "business" json data returned from Yelps API
+ ************************************************************************/
 public class YelpBusinesses {
 
     protected List<YelpBusinesses> businesses;
@@ -17,7 +17,8 @@ public class YelpBusinesses {
     protected Double rating;
     @SerializedName("is_closed")
     protected Boolean isClosed;
-//  protected YelpCategories categories;
+
+    //  protected YelpCategories categories;
     protected YelpLocation location;
 
     // constructor
@@ -32,6 +33,14 @@ public class YelpBusinesses {
 
     public List<YelpBusinesses> getBusinesses() {
         return businesses;
+    }
+
+    public YelpLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(YelpLocation location) {
+        this.location = location;
     }
 
     public String getId() {
