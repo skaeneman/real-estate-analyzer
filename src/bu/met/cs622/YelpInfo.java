@@ -23,7 +23,7 @@ public class YelpInfo {
     String title;
 
 
-    /** switch over to using 2 class files like this https://www.youtube.com/watch?v=4F1d6ELxF1c and a constructor */
+    /** switch over to using 2 class files like this https://www.youtube.com/watch?v=4F1d6ELxF1c and a constructor ; also need to add geters\setters for all fields*/
 
 
 
