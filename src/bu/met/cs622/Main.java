@@ -48,7 +48,7 @@ public class Main {
             }
         }
         catch (Exception ex) {
-            System.err.printf("User input error...%n%n%s", ex.getMessage());
+            System.err.printf("User input error...%nprinting stack trace...%n%s", ex.getMessage());
             ex.printStackTrace();
         }
 
