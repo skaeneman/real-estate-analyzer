@@ -4,7 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/********************************************************************
+ *  This class processes the "business" json data returned Yelps API
+ ********************************************************************/
 public class YelpBusinesses {
+
     protected List<YelpBusinesses> businesses;
     protected String id;
     protected String name;
