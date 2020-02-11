@@ -15,7 +15,6 @@ public class GenericStack<T> {
 
     /**
      * pushes an item onto the generic stack
-     * @return  the LIFO object
      */
     public void push(T item) {
         stackArray.add(item);
@@ -30,7 +29,7 @@ public class GenericStack<T> {
         if (stackSize == 0) {
             return null; // the stack is already empty
         } else {
-            // remove the last element to be added to the stack
+            // remove the last element that was added to the stack
             return stackArray.remove(stackArray.size() - 1);
         }
     }

@@ -66,22 +66,19 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
-        propertyType = input.nextLine();
-        propertyType.trim();
+        propertyType = input.nextLine().trim();
 
         System.out.println("Enter the CITY where the property is located: ");
-        propertyCity = input.nextLine();
-        propertyCity.trim();
+        propertyCity = input.nextLine().trim();
 
         System.out.println("Enter the STATE where the property is located: ");
-        propertyState = input.nextLine();
-        propertyState.trim();
+        propertyState = input.nextLine().trim();
 
         // ensure input is valid
         if (propertyType.equals("m") || propertyType.equals("s")) {
             try {
                 System.out.println("Enter price of investment property:");
-                Integer propertyPrice = Integer.valueOf(input.nextLine());
+                Integer propertyPrice = Integer.valueOf(input.nextLine().trim());
                 wantsToPrint = getPrintResponse();  // check if user wants to print
 
             } catch (NumberFormatException e) {
@@ -248,6 +245,8 @@ public class Main {
     /**
      * Processes data returned from the Yelp API.  Uses a generic stack class to
      * store the data returned from yelp.
+     * @param state     the state to search for businesses in
+     * @param city      the city to search for businesses in
      */
     public static void getYelpData(String city, String state) throws IOException {
         // use googles gson library for handling json objects
