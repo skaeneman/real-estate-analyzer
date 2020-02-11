@@ -18,7 +18,7 @@ public class YelpBusinesses {
     @SerializedName("is_closed")
     protected Boolean isClosed;
 
-    //  protected YelpCategories categories;
+    // protected YelpCategories categories;
     protected YelpLocation location;
 
     // constructor

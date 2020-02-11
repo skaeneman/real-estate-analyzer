@@ -241,7 +241,6 @@ public class Main {
     }
 
 
-
     /**
      * Processes data returned from the Yelp API.  Uses a generic stack class to
      * store the data returned from yelp.
