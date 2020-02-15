@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class YelpAPI {
@@ -57,5 +59,17 @@ public class YelpAPI {
         }
         return responseContent.toString();
     }
+
+    /**
+     * Finds the closest business to the investment property in miles
+     * @param businesses      a list of businesses returned by the Yelp API
+     * @return                an object that represents the nearest location
+     */
+    public YelpBusinesses findNearestBusiness(List<YelpBusinesses> businesses) {
+        Comparator<YelpBusinesses> comparator = Comparator.comparing(YelpBusinesses::getDistance);
+        YelpBusinesses closestRestaurant = businesses.stream().min(comparator).get();
+        return closestRestaurant;
+    }
+
 
 }

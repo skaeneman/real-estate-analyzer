@@ -392,6 +392,13 @@ public class Main {
             businessInfo.push(" ");
         }
 
+        // find the closest business to the property
+        YelpBusinesses closestBiz = yelpAPIData.findNearestBusiness(businesses);
+
+        System.out.printf("%nFinding closest business to the investment property...%n");
+        System.out.printf("'%s' is the shortest distance away (%s miles)%n", closestBiz.getName(),
+                closestBiz.getDistance() * 0.00062137119); // convert to miles
+
         // output data by popping elements off the generic stack
         for (int i = 0; i < businessInfo.stackSize(); i++) {
             String output = businessInfo.pop();
