@@ -12,9 +12,7 @@ package bu.met.cs622;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -106,6 +104,7 @@ public class Main {
 
                 // output property square feet
                 System.out.println(multiFamProp.propertySquareFootage());
+
                 // print the report if the HashMap key is set to true
                 if (wantsToPrint.containsKey(true)) {
                     String filePathToPrint = wantsToPrint.get(true); // get the file path from the key\value pair
@@ -177,7 +176,7 @@ public class Main {
         String filePath = null;
         String print;
 
-        // create a HashMap that will hold the valued returned to the caller
+        // create a HashMap that will hold the value returned to the caller
         HashMap<Boolean, String> printMap = new HashMap<Boolean, String>();
 
         Scanner in = new Scanner(System.in);
@@ -198,10 +197,39 @@ public class Main {
     }
 
     /**
-     * Prints the output of the property analysis to a file
+     * It will either print to a text file or write data to stream depending on user input
      * @param  propertyAnalysis    an ArrayList of strings that describe the property
+     * @param  filePath            the path where the file should be sent to as output
      */
     public static void print(ArrayList<String> propertyAnalysis, String filePath) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter 1 for TEXT output or 2 for BINARY output");
+        try {
+            String userInput = in.next();
+
+            switch (userInput) {
+                case "1":
+                    printText(propertyAnalysis, filePath);
+                    break;
+                case "2":
+                    printBinary(propertyAnalysis, filePath);
+                    break;
+                default:
+                    System.err.printf("%s is not a valid option", userInput);
+            }
+        }
+        catch (Exception ex) {
+            System.err.printf("User input error...%nprinting stack trace...%n%s", ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Prints the output of the property analysis to a text file
+     * @param  propertyAnalysis    an ArrayList of strings that describe the property
+     * @param  filePath            the path where the file should be sent to as output
+     */
+    public static void printText(ArrayList<String> propertyAnalysis, String filePath) {
         Formatter outfile = null;
 
         // get the current date and time and format it
@@ -240,6 +268,48 @@ public class Main {
         outfile.close();
     }
 
+    /**
+     * Prints an object output stream of the property analysis to a binary file
+     * @param  propertyAnalysis    an ArrayList of strings that describe the property
+     * @param  filePath            the path where the file should be sent to as output
+     */
+    public static void printBinary(ArrayList<String> propertyAnalysis, String filePath) {
+
+        // check the extension on the file the user entered
+        Optional<String> fileExtension = getFileExtension(filePath);
+
+        // route to the other method to print to a text file if the file extension is a .txt or .rtf
+        if (fileExtension.get() == "txt" || fileExtension.get() == "rtf") {
+            System.out.println("Oops you entered a text file extension not a data file....");
+            System.out.println("Printing to a text file instead...");
+            printText(propertyAnalysis, filePath);
+        } else {
+            // the file is a data file so print the object stream
+            try {
+                try (ObjectOutputStream outfile = new ObjectOutputStream(new FileOutputStream(filePath))) {
+
+                    // loop through objects and add them to the output stream report
+                    for (String propertyObj : propertyAnalysis) {
+                        outfile.writeObject(propertyObj);
+                    }
+                }
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Used to check the file extension of a file
+     * @param filePath     the path to the file that will have the extension checked
+     * @return             the file extension or an empty string
+     */
+    public static Optional<String> getFileExtension(String filePath) {
+        return Optional.ofNullable(filePath)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(filePath.lastIndexOf(".") + 1));
+    }
 
     /**
      * Processes data returned from the Yelp API.  Uses a generic stack class to
