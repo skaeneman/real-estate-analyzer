@@ -154,7 +154,7 @@ public class Main {
         String userInputPath = in.nextLine();
 
         // check the extension on the file the user entered
-        String extension = getFileExtension(userInputPath);
+        String extension = getFileExtension(userInputPath.trim());
 
         // if the extension is a .txt or .rtf then read-in as a text file
         if (extension.equals("txt") || extension.equals("rtf")) {
