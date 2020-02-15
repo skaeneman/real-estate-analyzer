@@ -145,15 +145,58 @@ public class Main {
         input.close();
     }
 
-
-    // TODO: Remove pathname /Users/scott/Desktop/testInput.txt
+    /**
+     * Will call secondary methods to read-in a text file or a binary file
+     */
     public static void getUserFileInput() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter full path including filename (e.g. /Users/scott/myFile.txt):");
         String userInputPath = in.nextLine();
 
+        // check the extension on the file the user entered
+        String extension = getFileExtension(userInputPath);
+
+        // if the extension is a .txt or .rtf then read-in as a text file
+        if (extension.equals("txt") || extension.equals("rtf")) {
+            System.out.println("File extension .txt or .rtf found....processing as text a file...");
+            getTextFile(userInputPath);
+        } else if (extension.equals("dat")) {
+            System.out.println("File extension .dat found....processing as a data file...");
+            getBinaryFile(userInputPath);
+        }
+        else {
+            System.out.println("Please enter a file that hs an extension of .txt, .rtf, or .dat");
+        }
+        in.close();
+    }
+
+    /**
+     * Reads in a binary object file to the application
+     * @param userInputPath     the path to the binary file
+     */
+    public static void getBinaryFile(String userInputPath) {
+        String input = userInputPath.trim();
+        try (ObjectInputStream infile = new ObjectInputStream(new FileInputStream(input))) {
+            while (true)
+            {
+                System.out.printf("%s%n", infile.readObject());
+            }
+        } catch (EOFException eof) {
+            System.out.println("Done reading in binary file...");
+        } catch (IOException | ClassNotFoundException ex) {
+            System.err.printf("Cannot open binary file: %s ", userInputPath.trim());
+            ex.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Reads in a text file to the application
+     * @param userInputPath     the path to the text file
+     */
+    public static void getTextFile(String userInputPath) {
         try{
-           Scanner infile = new Scanner(new File(userInputPath.trim()));
+            Scanner infile = new Scanner(new File(userInputPath.trim()));
 
             while (infile.hasNext())
             {
@@ -162,10 +205,10 @@ public class Main {
             }
             infile.close();
         } catch(FileNotFoundException e) {
-            System.err.printf("Cannot open file: %s ", userInputPath.trim());
+            System.err.printf("Cannot open text file: %s ", userInputPath.trim());
+            e.printStackTrace();
             System.exit(0);
         }
-        in.close();
     }
 
     /**
@@ -222,6 +265,7 @@ public class Main {
             System.err.printf("User input error...%nprinting stack trace...%n%s", ex.getMessage());
             ex.printStackTrace();
         }
+        in.close();
     }
 
     /**
@@ -276,10 +320,10 @@ public class Main {
     public static void printBinary(ArrayList<String> propertyAnalysis, String filePath) {
 
         // check the extension on the file the user entered
-        Optional<String> fileExtension = getFileExtension(filePath);
+        String fileExtension = getFileExtension(filePath);
 
         // route to the other method to print to a text file if the file extension is a .txt or .rtf
-        if (fileExtension.get() == "txt" || fileExtension.get() == "rtf") {
+        if (fileExtension.equals("txt") || fileExtension.equals("rtf")) {
             System.out.println("Oops you entered a text file extension not a data file....");
             System.out.println("Printing to a text file instead...");
             printText(propertyAnalysis, filePath);
@@ -301,14 +345,16 @@ public class Main {
     }
 
     /**
-     * Used to check the file extension of a file
+     * Check the file extension of a file
      * @param filePath     the path to the file that will have the extension checked
      * @return             the file extension or an empty string
      */
-    public static Optional<String> getFileExtension(String filePath) {
-        return Optional.ofNullable(filePath)
-                .filter(f -> f.contains("."))
-                .map(f -> f.substring(filePath.lastIndexOf(".") + 1));
+    public static String getFileExtension(String filePath) {
+        // filter for a "." then return the characters after the "."
+        Optional<String> extension = Optional.ofNullable(filePath)
+                .filter(f -> f.contains("."))  // find the extension
+                .map(m -> m.substring(filePath.lastIndexOf(".") + 1));
+        return extension.get(); // return just the String from the Optional
     }
 
     /**
