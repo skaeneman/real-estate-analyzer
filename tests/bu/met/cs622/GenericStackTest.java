@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenericStackTest {
 
-
     @Test
     void push() {
         GenericStack<String> genStack = new GenericStack<>();

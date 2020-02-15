@@ -70,10 +70,13 @@ public class SingleFamilyProperty extends InvestmentProperty {
      */
     public void display(ArrayList<String> propertyAnalysis) {
         System.out.println("************** Single-Family Property Analysis ****************");
-        for (String singleProp : propertyAnalysis) {
-            System.out.println(singleProp);
-        }
-//        System.out.println("***************************************************************");
+
+        propertyAnalysis.stream()
+                .forEach(System.out::print);
+
+//        for (String singleProp : propertyAnalysis) {
+//            System.out.println(singleProp);
+//        }
     }
 
 

@@ -82,10 +82,13 @@ public class MultiFamilyProperty extends InvestmentProperty {
      */
     public void display(ArrayList<String> propertyAnalysis) {
         System.out.println("********************* Multi-Family Analysis *******************");
-        for (String prop : propertyAnalysis) {
-            System.out.println(prop);
-        }
-//        System.out.println("***************************************************************");
+
+        propertyAnalysis.stream()
+                .forEach(System.out::print);
+
+//        for (String prop : propertyAnalysis) {
+//            System.out.println(prop);
+//        }
     }
 
 }//class

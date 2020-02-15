@@ -318,15 +318,13 @@ public class Main {
      * @param  filePath            the path where the file should be sent to as output
      */
     public static void printBinary(ArrayList<String> propertyAnalysis, String filePath) {
-
         // check the extension on the file the user entered
         String fileExtension = getFileExtension(filePath);
 
         // route to the other method to print to a text file if the file extension is a .txt or .rtf
         if (fileExtension.equals("txt") || fileExtension.equals("rtf")) {
-            System.out.println("Oops you entered a text file extension not a data file....");
-            System.out.println("Printing to a text file instead...");
-            printText(propertyAnalysis, filePath);
+            System.out.println("Oops you entered a text file extension....printing to a text file...");
+            printText(propertyAnalysis, filePath); // call method that handles printing text
         } else {
             // the file is a data file so print the object stream
             try {
@@ -352,8 +350,8 @@ public class Main {
     public static String getFileExtension(String filePath) {
         // filter for a "." then return the characters after the "."
         Optional<String> extension = Optional.ofNullable(filePath)
-                .filter(f -> f.contains("."))  // find the extension
-                .map(m -> m.substring(filePath.lastIndexOf(".") + 1));
+                .filter(file -> file.contains("."))  // find the extension
+                .map(ext -> ext.substring(filePath.lastIndexOf(".") + 1));
         return extension.get(); // return just the String from the Optional
     }
 
