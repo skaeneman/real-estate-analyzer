@@ -67,8 +67,8 @@ public class YelpAPI {
      */
     public YelpBusinesses findNearestBusiness(List<YelpBusinesses> businesses) {
         Comparator<YelpBusinesses> comparator = Comparator.comparing(YelpBusinesses::getDistance);
-        YelpBusinesses closestRestaurant = businesses.stream().min(comparator).get();
-        return closestRestaurant;
+        YelpBusinesses closestBiz = businesses.stream().min(comparator).get();
+        return closestBiz;
     }
 
 
