@@ -66,9 +66,28 @@ public class Main {
 
 
 
-        System.err.println("testing database connection...");
+
+
+        System.out.println("testing database connection...");
         RealEstateDB db = new RealEstateDB();
+        db.establishConnection();
+
+        System.out.println("drop database table...");
+        db.dropTable("business");
+
+
+        System.out.println("checking if table exists...");
+        boolean exists = db.doesTableExist("business");
+        System.out.println(exists ? "yes" : "no");
+
+
+        System.out.println("creating database table...");
         db.createBusinessTable();
+
+        System.out.println("inserting database data...");
+        db.insertBusinessTableData();
+
+
 
 
 
