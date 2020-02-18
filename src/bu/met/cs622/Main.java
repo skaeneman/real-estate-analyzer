@@ -63,6 +63,18 @@ public class Main {
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
 
+
+
+
+        System.err.println("testing database connection...");
+        RealEstateDB db = new RealEstateDB();
+        db.createBusinessTable();
+
+
+
+
+
+
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine().trim();
 
