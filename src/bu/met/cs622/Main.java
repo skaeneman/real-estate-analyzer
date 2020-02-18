@@ -72,14 +72,15 @@ public class Main {
         RealEstateDB db = new RealEstateDB();
         db.establishConnection();
 
+//        String query = db.queryTable("business");
+//        System.out.printf("query database table...%n", query);
+
         System.out.println("drop database table...");
         db.dropTable("business");
-
 
         System.out.println("checking if table exists...");
         boolean exists = db.doesTableExist("business");
         System.out.println(exists ? "yes" : "no");
-
 
         System.out.println("creating database table...");
         db.createBusinessTable();
@@ -87,7 +88,8 @@ public class Main {
         System.out.println("inserting database data...");
         db.insertBusinessTableData();
 
-
+        String query2 = db.queryTable("business");
+        System.out.printf("query database table...%n", query2);
 
 
 

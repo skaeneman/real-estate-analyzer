@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Feb 17 22:10:05 EST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-0170-5646-2f38-00001f746d08 
+Mon Feb 17 22:41:33 EST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-0170-5662-fe96-00001f7468d8 
 on database directory /Users/scott/IdeaProjects/RealEstateAnalyzer/RealEstateAnalyzerDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69 
 Loaded from file:/Users/scott/Desktop/derby.jar
 java.vendor=Oracle Corporation

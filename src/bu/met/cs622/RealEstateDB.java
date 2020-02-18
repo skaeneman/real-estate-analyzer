@@ -51,11 +51,39 @@ public class RealEstateDB {
             connection.close();
 
         } catch (SQLException  e) {
-            System.err.println("Could not create database table...");
+            System.err.println("Could not drop database table...");
             e.printStackTrace();
         }
     }
 
+    public String queryTable(String tableName) {
+        String output = null;
+        try {
+            Connection connection = establishConnection();
+
+//            PreparedStatement prepstmt =
+//                    connection.prepareStatement("SELECT * FROM " + tableName);
+
+            PreparedStatement prepstmt =
+                    connection.prepareStatement("Select * from business ");
+
+            ResultSet rset =  prepstmt.executeQuery();
+            output = rset.getString(1);
+
+            while (rset.next())
+            {
+                output += rset.getString(1);
+            }
+
+
+            connection.close();
+
+        } catch (SQLException  e) {
+            System.err.println("Could not query database table...");
+            e.printStackTrace();
+        }
+        return output;
+    }
 
     public void createBusinessTable() throws SQLException {
         // check if the table was already created
@@ -66,7 +94,9 @@ public class RealEstateDB {
                 Connection connection = establishConnection();
 
                 PreparedStatement prepstmt =
-                        connection.prepareStatement("CREATE TABLE business(id int NOT NULL, business_name varchar(30) not null, primary key (id))");
+                        connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+                                "business_name varchar(30) not null, " +
+                                "primary key (id))");
 
                 prepstmt.executeUpdate();
                 connection.close();
@@ -82,7 +112,7 @@ public class RealEstateDB {
         try {
             Connection connection = establishConnection();
             PreparedStatement prepstmt =
-                    connection.prepareStatement("INSERT INTO business VALUES (id 1, business_name 'test biz 1'), (id 2, business_name 'test biz 2')");
+                    connection.prepareStatement("INSERT INTO business (business_name) VALUES ('test biz 1'), ('test biz 2')");
 
             prepstmt.executeUpdate();
             connection.close();
