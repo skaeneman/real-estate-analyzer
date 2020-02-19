@@ -28,9 +28,14 @@ public class RealEstateDB {
     public boolean doesTableExist(String tableName) throws SQLException {
         Connection connection = establishConnection();
         if (connection != null) {
-            // check if the table already exists
-            DatabaseMetaData dbmd = connection.getMetaData();
-            ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(),null);
+
+             // check if the table already exists
+             DatabaseMetaData dbmd = connection.getMetaData();
+
+            // use this for Derby, table name needs to be capitalized
+            // ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(),null);
+
+            ResultSet rs = dbmd.getTables(null, null, tableName,null);
 
             if (rs.next()) {
                 System.out.println("The table named: " + rs.getString("TABLE_NAME") + " was already created...");
@@ -77,11 +82,12 @@ public class RealEstateDB {
                     connection.prepareStatement("Select * from business ");
 
             ResultSet rset =  prepstmt.executeQuery();
-            output = rset.getString(1);
 
             while (rset.next())
             {
-                output += rset.getString(1);
+                System.out.printf(rset.getString(1));
+                System.out.printf(rset.getString(2));
+//                output += rset.getString(1);
             }
 
 

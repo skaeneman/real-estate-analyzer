@@ -72,15 +72,19 @@ public class Main {
         RealEstateDB db = new RealEstateDB();
         db.establishConnection();
 
+        System.out.println("checking if table exists 1...");
+        boolean exists = db.doesTableExist("business");
+        System.out.println(exists ? "yes" : "no");
+
 //        String query = db.queryTable("business");
 //        System.out.printf("query database table...%n", query);
 
         System.out.println("drop database table...");
         db.dropTable("business");
 
-        System.out.println("checking if table exists...");
-        boolean exists = db.doesTableExist("business");
-        System.out.println(exists ? "yes" : "no");
+        System.out.println("checking if table exists 2...");
+        boolean exists2 = db.doesTableExist("business");
+        System.out.println(exists2 ? "yes" : "no");
 
         System.out.println("creating database table...");
         db.createBusinessTable();
@@ -90,7 +94,9 @@ public class Main {
 
         String query2 = db.queryTable("business");
         System.out.printf("query database table...%n", query2);
-
+//        for (String data : query2) {
+//
+//        }
 
 
 
