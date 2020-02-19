@@ -92,11 +92,11 @@ public class Main {
         System.out.println("inserting database data...");
         db.insertBusinessTableData();
 
-        String query2 = db.queryTable("business");
-        System.out.printf("query database table...%n", query2);
-//        for (String data : query2) {
-//
-//        }
+//        String query2 = db.queryTable("business");
+//        System.out.printf("query database table...%n");
+
+
+
 
 
 

@@ -21,6 +21,7 @@ public class RealEstateDB {
             System.err.println("Could not create database connection...");
             e.printStackTrace();
         }
+        System.out.printf(connection.toString());
         return connection;
     }
 
@@ -70,8 +71,8 @@ public class RealEstateDB {
         }
     }
 
-    public String queryTable(String tableName) {
-        String output = null;
+    public ResultSet queryTable(String tableName) {
+        ResultSet output = null;
         try {
             Connection connection = establishConnection();
 
@@ -79,20 +80,16 @@ public class RealEstateDB {
 //                    connection.prepareStatement("SELECT * FROM " + tableName);
 
             PreparedStatement prepstmt =
-                    connection.prepareStatement("Select * from business ");
+                    connection.prepareStatement("SELECT * FROM " + tableName);
 
             ResultSet rset =  prepstmt.executeQuery();
+            output = rset;
 
-            while (rset.next())
-            {
-                System.out.printf(rset.getString(1));
-                System.out.printf(rset.getString(2));
-//                output += rset.getString(1);
+            while (rset.next()) {
+                System.out.printf("id: %s%n", rset.getString(1)); // id
+                System.out.printf("name: %s%n", rset.getString(2)); // business_name
             }
-
-
             connection.close();
-
         } catch (SQLException  e) {
             System.err.println("Could not query database table...");
             e.printStackTrace();
