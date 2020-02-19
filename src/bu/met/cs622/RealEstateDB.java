@@ -121,27 +121,42 @@ public class RealEstateDB {
         // check if the table was already created
         boolean doesTableExist = doesTableExist("business");
         if (doesTableExist != true) {
-            // create the table
+            // try to create the tables
             try {
                 Connection connection = establishConnection();
 
-                // TODO: ONLY CREATE TABLE IF THE CONNECTION EXISTS
-
-                PreparedStatement prepstmt =
+                if (connection != null) {
+                    PreparedStatement prepstmt1 =
                         // if testing with Derby use the below to auto increment the id's
-//                      connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+                        // connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
 
+                        // create the business table
                         connection.prepareStatement("CREATE TABLE business(id serial," +
-                                "business_name varchar(500) not null, " +
-                                "url TEXT not null, " +
-                                "distance varchar(500) not null, " +
-                                "rating varchar(500) not null, " +
-                                "is_closed BOOLEAN not null, " +
-                                "primary key (id))");
+                                "business_name varchar(500) NOT NULL, " +
+                                "url TEXT NOT NULL, " +
+                                "distance varchar(500) NOT NULL, " +
+                                "rating varchar(500) NOT NULL, " +
+                                "is_closed BOOLEAN NOT NULL, " +
+                                "PRIMARY KEY (id))");
+                        prepstmt1.executeUpdate();
 
-                prepstmt.executeUpdate();
+                    // create the location table
+                    PreparedStatement prepstmt2 =
+                        connection.prepareStatement("CREATE TABLE location(id serial," +
+                                "business_id int NOT NULL, " +
+                                "city varchar(500) NOT NULL, " +
+                                "country varchar(500) NOT NULL, " +
+                                "address1 varchar(500) NOT NULL, " +
+                                "state varchar(500) NOT NULL, " +
+                                "zip_code varchar(500) NOT NULL, " +
+                                "PRIMARY KEY (id), " +
+                                "FOREIGN KEY (business_id) REFERENCES business (id))");
+
+                prepstmt2.executeUpdate();
                 connection.close();
-
+            } else {
+                    System.err.println("Could not establish connection.  Table not created");
+                }
             } catch (SQLException  e) {
                 System.err.println("Could not create database table...");
                 e.printStackTrace();

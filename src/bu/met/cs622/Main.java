@@ -80,6 +80,7 @@ public class Main {
 //        System.out.printf("query database table...%n", query);
 
         System.out.println("drop database table...");
+        db.dropTable("location");
         db.dropTable("business");
 
         System.out.println("checking if table exists 2...");
@@ -88,6 +89,7 @@ public class Main {
 
         System.out.println("creating database table...");
         db.createBusinessTable();
+
 //
 //        System.out.println("inserting database data...");
 //        db.insertBusinessTableData();
