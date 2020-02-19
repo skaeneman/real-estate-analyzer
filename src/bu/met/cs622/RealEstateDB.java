@@ -4,6 +4,9 @@ import java.sql.*;
 
 public class RealEstateDB {
 
+    /**
+     * establishes a connection to the PostgreSQL database instance
+     */
     public Connection establishConnection() {
         Connection connection = null;
 
@@ -25,7 +28,11 @@ public class RealEstateDB {
         return connection;
     }
 
-
+    /**
+     * Checks if a database table exists in the database
+     * @param tableName     the name of the database table to check
+     * @return boolean      returns a boolean value of true if a table exists
+     */
     public boolean doesTableExist(String tableName) throws SQLException {
         Connection connection = establishConnection();
         if (connection != null) {
@@ -48,10 +55,13 @@ public class RealEstateDB {
         return false;
     }
 
-
+    /**
+     * Drops a database table from the database if it exists
+     * @param tableName     the name of the database table to drop
+     */
     public void dropTable(String tableName) throws SQLException {
         // check if the table exists before trying to drop it
-        boolean doesTableExist = doesTableExist("business");
+        boolean doesTableExist = doesTableExist(tableName);
         if (doesTableExist) {
             try {
                 Connection connection = establishConnection();
@@ -71,6 +81,11 @@ public class RealEstateDB {
         }
     }
 
+    /**
+     * Querries a database table
+     * @param tableName     the name of the database table to query
+     * @return ResultSet      returns the results of the query
+     */
     public ResultSet queryTable(String tableName) {
         ResultSet output = null;
         try {
@@ -97,6 +112,9 @@ public class RealEstateDB {
         return output;
     }
 
+    /**
+     * Creates a database table called 'Business'
+\    */
     public void createBusinessTable() throws SQLException {
         // check if the table was already created
         boolean doesTableExist = doesTableExist("business");
@@ -122,6 +140,9 @@ public class RealEstateDB {
         }
     }
 
+    /**
+     * inserts data into the business database table
+     */
     public void insertBusinessTableData() {
         try {
             Connection connection = establishConnection();
