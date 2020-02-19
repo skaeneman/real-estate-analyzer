@@ -1,5 +1,7 @@
 package bu.met.cs622;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.*;
 
 public class RealEstateDB {
@@ -128,7 +130,12 @@ public class RealEstateDB {
 //                      connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
 
                         connection.prepareStatement("CREATE TABLE business(id serial," +
-                                "business_name varchar(30) not null, primary key (id))");
+                                "business_name varchar(30) not null, " +
+                                "url varchar(30) not null, " +
+                                "distance varchar(30) not null, " +
+                                "rating varchar(30) not null, " +
+                                "is_closed BOOLEAN not null, " +
+                                "primary key (id))");
 
                 prepstmt.executeUpdate();
                 connection.close();
@@ -147,7 +154,8 @@ public class RealEstateDB {
         try {
             Connection connection = establishConnection();
             PreparedStatement prepstmt =
-                    connection.prepareStatement("INSERT INTO business (business_name) VALUES ('test biz 1'), ('test biz 2')");
+                    connection.prepareStatement("INSERT INTO business (business_name, url, distance, rating, is_closed)" +
+                            " VALUES ('test biz1', 'http://biz1.com', '1.65543', '4.5', FALSE), ('test biz2', 'http://biz2.com', '3.343', '5', TRUE)");
 
             prepstmt.executeUpdate();
             connection.close();

@@ -68,33 +68,33 @@ public class Main {
 
 
 
-        System.out.println("testing database connection...");
-        RealEstateDB db = new RealEstateDB();
-        db.establishConnection();
-
-        System.out.println("checking if table exists 1...");
-        boolean exists = db.doesTableExist("business");
-        System.out.println(exists ? "yes" : "no");
-
-//        String query = db.queryTable("business");
-//        System.out.printf("query database table...%n", query);
-
-        System.out.println("drop database table...");
-        db.dropTable("business");
-
-        System.out.println("checking if table exists 2...");
-        boolean exists2 = db.doesTableExist("business");
-        System.out.println(exists2 ? "yes" : "no");
-
-        System.out.println("creating database table...");
-        db.createBusinessTable();
-
-        System.out.println("inserting database data...");
-        db.insertBusinessTableData();
-
-//        String query2 = db.queryTable("business");
-//        System.out.printf("query database table...%n");
-
+//        System.out.println("testing database connection...");
+//        RealEstateDB db = new RealEstateDB();
+//        db.establishConnection();
+//
+//        System.out.println("checking if table exists 1...");
+//        boolean exists = db.doesTableExist("business");
+//        System.out.println(exists ? "yes" : "no");
+//
+////        String query = db.queryTable("business");
+////        System.out.printf("query database table...%n", query);
+//
+//        System.out.println("drop database table...");
+//        db.dropTable("business");
+//
+//        System.out.println("checking if table exists 2...");
+//        boolean exists2 = db.doesTableExist("business");
+//        System.out.println(exists2 ? "yes" : "no");
+//
+//        System.out.println("creating database table...");
+//        db.createBusinessTable();
+//
+//        System.out.println("inserting database data...");
+//        db.insertBusinessTableData();
+//
+////        String query2 = db.queryTable("business");
+////        System.out.printf("query database table...%n");
+//
 
 
 
