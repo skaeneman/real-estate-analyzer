@@ -43,19 +43,25 @@ public class RealEstateDB {
     }
 
 
-    public void dropTable(String tableName) {
-        try {
-            Connection connection = establishConnection();
+    public void dropTable(String tableName) throws SQLException {
+        // check if the table exists before trying to drop it
+        boolean doesTableExist = doesTableExist("business");
+        if (doesTableExist) {
+            try {
+                Connection connection = establishConnection();
 
-            PreparedStatement prepstmt =
-                    connection.prepareStatement("DROP TABLE " + tableName);
+                PreparedStatement prepstmt =
+                        connection.prepareStatement("DROP TABLE " + tableName);
 
-            prepstmt.executeUpdate();
-            connection.close();
+                prepstmt.executeUpdate();
+                connection.close();
 
-        } catch (SQLException  e) {
-            System.err.println("Could not drop database table...");
-            e.printStackTrace();
+            } catch (SQLException e) {
+                System.err.println("Could not drop database table...");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println(tableName + " table does not exist, cannot drop...");
         }
     }
 
@@ -97,9 +103,11 @@ public class RealEstateDB {
                 Connection connection = establishConnection();
 
                 PreparedStatement prepstmt =
-                        connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
-                                "business_name varchar(30) not null, " +
-                                "primary key (id))");
+                        // if testing with Derby use the below to auto increment the id's
+//                      connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+
+                        connection.prepareStatement("CREATE TABLE business(id serial," +
+                                "business_name varchar(30) not null, primary key (id))");
 
                 prepstmt.executeUpdate();
                 connection.close();
