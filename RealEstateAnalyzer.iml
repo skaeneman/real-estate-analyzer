@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/derby.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/postgresql-42.2.10.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/derbyshared.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/derby.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/derbyshared.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

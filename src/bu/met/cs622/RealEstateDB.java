@@ -8,13 +8,16 @@ public class RealEstateDB {
         Connection connection = null;
 
         try {
-            final String DATABASE_URL = "jdbc:derby:RealEstateAnalyzerDB;create=true";
+//          final String DATABASE_URL = "jdbc:derby:RealEstateAnalyzerDB;create=true";
+            final String DATABASE_URL = "jdbc:postgresql://127.0.0.1:5432/RealEstateAnalyzerDB";
 
             final String DATABASE_USERNAME = "student622";
             final String DATABASE_PASSWORD = "nopasswd";
 
+            Class.forName("org.postgresql.Driver");
+
             connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-        } catch (SQLException  e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Could not create database connection...");
             e.printStackTrace();
         }

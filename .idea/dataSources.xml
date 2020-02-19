@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Apache Derby (Embedded) - jdbc:derby:RealEstateAnalyzerDB" uuid="cb223155-4294-4b10-9b0b-4b35cd4da068">
+      <driver-ref>derby.embedded</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.apache.derby.iapi.jdbc.AutoloadedDriver</jdbc-driver>
+      <jdbc-url>jdbc:derby:jdbc:derby:RealEstateAnalyzerDB</jdbc-url>
+    </data-source>
+  </component>
+</project>

@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="gson-2.8.6">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/gson-2.8.6.jar!/" />
-      <root url="jar://$USER_HOME$/Desktop/derby.jar!/" />
-      <root url="jar://$USER_HOME$/Desktop/derbyshared.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/postgresql-42.2.10.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/gson-2.8.6.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/derby.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MSSD/METCS622/intellij_db_drivers/derbyshared.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
