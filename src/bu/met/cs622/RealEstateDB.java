@@ -125,15 +125,17 @@ public class RealEstateDB {
             try {
                 Connection connection = establishConnection();
 
+                // TODO: ONLY CREATE TABLE IF THE CONNECTION EXISTS
+
                 PreparedStatement prepstmt =
                         // if testing with Derby use the below to auto increment the id's
 //                      connection.prepareStatement("CREATE TABLE business(id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
 
                         connection.prepareStatement("CREATE TABLE business(id serial," +
-                                "business_name varchar(30) not null, " +
-                                "url varchar(30) not null, " +
-                                "distance varchar(30) not null, " +
-                                "rating varchar(30) not null, " +
+                                "business_name varchar(500) not null, " +
+                                "url TEXT not null, " +
+                                "distance varchar(500) not null, " +
+                                "rating varchar(500) not null, " +
                                 "is_closed BOOLEAN not null, " +
                                 "primary key (id))");
 
@@ -148,14 +150,21 @@ public class RealEstateDB {
     }
 
     /**
-     * inserts data into the business database table
+     * Inserts data into the business database table
      */
-    public void insertBusinessTableData() {
+    public void insertBusinessTableData(String business_name, String url, double distance, double rating, Boolean is_closed) {
+        String b = business_name;
         try {
             Connection connection = establishConnection();
             PreparedStatement prepstmt =
                     connection.prepareStatement("INSERT INTO business (business_name, url, distance, rating, is_closed)" +
-                            " VALUES ('test biz1', 'http://biz1.com', '1.65543', '4.5', FALSE), ('test biz2', 'http://biz2.com', '3.343', '5', TRUE)");
+                            " VALUES (?, ?, ?, ?, ?)");
+
+            prepstmt.setString(1, business_name);
+            prepstmt.setString(2, url);
+            prepstmt.setDouble(3, distance);
+            prepstmt.setDouble(4, rating);
+            prepstmt.setBoolean(5, is_closed);
 
             prepstmt.executeUpdate();
             connection.close();

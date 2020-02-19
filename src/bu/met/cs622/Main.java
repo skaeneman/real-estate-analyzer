@@ -69,25 +69,25 @@ public class Main {
 
 
 //        System.out.println("testing database connection...");
-//        RealEstateDB db = new RealEstateDB();
+        RealEstateDB db = new RealEstateDB();
 //        db.establishConnection();
 //
-//        System.out.println("checking if table exists 1...");
-//        boolean exists = db.doesTableExist("business");
-//        System.out.println(exists ? "yes" : "no");
-//
-////        String query = db.queryTable("business");
-////        System.out.printf("query database table...%n", query);
-//
-//        System.out.println("drop database table...");
-//        db.dropTable("business");
-//
-//        System.out.println("checking if table exists 2...");
-//        boolean exists2 = db.doesTableExist("business");
-//        System.out.println(exists2 ? "yes" : "no");
-//
-//        System.out.println("creating database table...");
-//        db.createBusinessTable();
+        System.out.println("checking if table exists 1...");
+        boolean exists = db.doesTableExist("business");
+        System.out.println(exists ? "yes" : "no");
+
+//        String query = db.queryTable("business");
+//        System.out.printf("query database table...%n", query);
+
+        System.out.println("drop database table...");
+        db.dropTable("business");
+
+        System.out.println("checking if table exists 2...");
+        boolean exists2 = db.doesTableExist("business");
+        System.out.println(exists2 ? "yes" : "no");
+
+        System.out.println("creating database table...");
+        db.createBusinessTable();
 //
 //        System.out.println("inserting database data...");
 //        db.insertBusinessTableData();
@@ -415,6 +415,9 @@ public class Main {
         // instantiate a generic string stack
         GenericStack<String> businessInfo = new GenericStack<>();
 
+        // instantiate an object of the database class
+        RealEstateDB db = new RealEstateDB();
+
         for (int i = 0; i < businesses.size(); i++) {
             // convert meters to miles
             Double meters = businesses.get(i).getDistance();
@@ -429,6 +432,11 @@ public class Main {
                     + businesses.get(i).getLocation().getState() + " " + businesses.get(i).getLocation().getZipCode());
             businessInfo.push(businesses.get(i).getName());
             businessInfo.push(" ");
+
+            // store the businesses data to the database
+            db.insertBusinessTableData(businesses.get(i).getName(), businesses.get(i).getUrl(),
+                    miles, businesses.get(i).getRating(), businesses.get(i).getClosed());
+
         }
 
         // find the closest business to the property
