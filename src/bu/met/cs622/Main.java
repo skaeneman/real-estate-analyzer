@@ -91,8 +91,12 @@ public class Main {
         db.createBusinessAndLocationTables();
 
         System.out.println("insert business and location database tables...");
-        db.insertBusinessAndLocationTableData("test biz", "http://something.com", 0.01,
-                4.6, true, "boston", "USA", "123 fake st", "MA", "02139");
+        db.insertBusinessAndLocationTableData("test biz1", "http://something.com", 0.01,
+                3.2, true, "boston", "USA", "5656 fake st", "MA", "02139");
+        db.insertBusinessAndLocationTableData("test biz2", "http://something.com", 0.01,
+                1.8, true, "cambridge", "USA", "5656 fake st", "MA", "02139");
+        db.insertBusinessAndLocationTableData("test biz3", "http://something.com", 0.01,
+                4.1, true, "medford", "USA", "34 fake st", "MA", "02139");
 
         System.out.printf("query database tables...%n");
         db.queryBusinessAndLocationData();

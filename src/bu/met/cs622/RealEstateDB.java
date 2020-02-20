@@ -96,7 +96,7 @@ public class RealEstateDB {
 //                    connection.prepareStatement("SELECT * FROM " + tableName);
 
             PreparedStatement prepstmt =
-                    connection.prepareStatement("SELECT * FROM " + tableName);
+                    connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY distance ASC");
 
             ResultSet rset =  prepstmt.executeQuery();
             output = rset;
@@ -207,7 +207,7 @@ public class RealEstateDB {
                     connection.prepareStatement("INSERT INTO location (business_id, city, country, address1, state, zip_code)" +
                             " VALUES (?, ?, ?, ?, ?, ?)");
 
-                    prepstmt2.setInt(1, business_id);
+                    prepstmt2.setInt(1, business_id); // insert foreign key
                     prepstmt2.setString(2, city);
                     prepstmt2.setString(3, country);
                     prepstmt2.setString(4, address1);
@@ -233,8 +233,9 @@ public class RealEstateDB {
 
             // Join both the business and location tables
             PreparedStatement prepstmt =
-                    connection.prepareStatement("SELECT business_name, address1 " +
-                            "FROM business, location Where business.id = location.business_id;");
+                    connection.prepareStatement("SELECT business_name, address1, rating " +
+                            "FROM business, location Where business.id = location.business_id " +
+                            "ORDER BY rating DESC;");
 
             ResultSet rset =  prepstmt.executeQuery();
             output = rset;
@@ -242,6 +243,7 @@ public class RealEstateDB {
             while (rset.next()) {
                 System.out.printf("name: %s%n", rset.getString(1)); // business_name from business table
                 System.out.printf("address: %s%n", rset.getString(2)); // address from location table
+                System.out.printf("rating: %s%n", rset.getString(3)); // rating from business table
             }
             connection.close();
         } catch (SQLException  e) {
