@@ -26,7 +26,6 @@ public class RealEstateDB {
             System.err.println("Could not create database connection...");
             e.printStackTrace();
         }
-        System.out.printf(connection.toString());
         return connection;
     }
 
@@ -165,7 +164,8 @@ public class RealEstateDB {
     }
 
     /**
-     * Inserts data into the business and location database table
+     * Inserts data into the business and location database tables.  The location table takes a
+     * foreign key from the business table.
      * @param
      * @param
      * @param
@@ -175,7 +175,7 @@ public class RealEstateDB {
      * @param
      * @param
      * @param
-     * @param     *
+     * @param
      */
     public void insertBusinessAndLocationTableData(String business_name, String url, double distance, double rating,
                                                    Boolean is_closed, String city, String country, String address1,
@@ -222,6 +222,33 @@ public class RealEstateDB {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Joins both the 'Business' and 'Location' database tables and returns name and location
+     * */
+    public ResultSet queryBusinessAndLocationData() {
+        ResultSet output = null;
+        try {
+            Connection connection = establishConnection();
+
+            // Join both the business and location tables
+            PreparedStatement prepstmt =
+                    connection.prepareStatement("SELECT business_name, address1 " +
+                            "FROM business, location Where business.id = location.business_id;");
+
+            ResultSet rset =  prepstmt.executeQuery();
+            output = rset;
+
+            while (rset.next()) {
+                System.out.printf("name: %s%n", rset.getString(1)); // business_name from business table
+                System.out.printf("address: %s%n", rset.getString(2)); // address from location table
+            }
+            connection.close();
+        } catch (SQLException  e) {
+            System.err.println("Could not query database table...");
+            e.printStackTrace();
+        }
+        return output;
+    }
 
 }

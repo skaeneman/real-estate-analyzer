@@ -90,13 +90,13 @@ public class Main {
         System.out.println("creating database table...");
         db.createBusinessAndLocationTables();
 
-//
-//        System.out.println("inserting database data...");
-//        db.insertBusinessTableData();
-//
-////        String query2 = db.queryTable("business");
-////        System.out.printf("query database table...%n");
-//
+        System.out.println("insert business and location database tables...");
+        db.insertBusinessAndLocationTableData("test biz", "http://something.com", 0.01,
+                4.6, true, "boston", "USA", "123 fake st", "MA", "02139");
+
+        System.out.printf("query database tables...%n");
+        db.queryBusinessAndLocationData();
+
 
 
 
