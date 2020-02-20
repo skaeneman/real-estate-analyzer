@@ -88,7 +88,7 @@ public class Main {
         System.out.println(exists2 ? "yes" : "no");
 
         System.out.println("creating database table...");
-        db.createBusinessTable();
+        db.createBusinessAndLocationTables();
 
 //
 //        System.out.println("inserting database data...");
@@ -436,7 +436,7 @@ public class Main {
             businessInfo.push(" ");
 
             // store the businesses data to the database
-            db.insertBusinessTableData(businesses.get(i).getName(), businesses.get(i).getUrl(),
+            db.insertBusinessAndLocationTableData(businesses.get(i).getName(), businesses.get(i).getUrl(),
                     miles, businesses.get(i).getRating(), businesses.get(i).getClosed());
 
         }

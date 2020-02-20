@@ -21,7 +21,7 @@ class RealEstateDBTest {
     void doesTableExist() throws SQLException {
         RealEstateDB db = new RealEstateDB();
         db.dropTable("business");
-        db.createBusinessTable();
+        db.createBusinessAndLocationTables();
         boolean exists = db.doesTableExist("business");
         assertTrue(exists);
     }
@@ -29,7 +29,7 @@ class RealEstateDBTest {
     @Test
     void dropTable() throws SQLException {
         RealEstateDB db = new RealEstateDB();
-        db.createBusinessTable();
+        db.createBusinessAndLocationTables();
         db.dropTable("business");
     }
 
@@ -37,8 +37,8 @@ class RealEstateDBTest {
     void queryTable() throws SQLException {
         RealEstateDB db = new RealEstateDB();
         db.dropTable("business");
-        db.createBusinessTable();
-        db.insertBusinessTableData("test biz1", "http://biz2.com", 4.23, '5', false);
+        db.createBusinessAndLocationTables();
+        db.insertBusinessAndLocationTableData("test biz1", "http://biz2.com", 4.23, '5', false);
         ResultSet query = db.queryTable("business");
         assertNotNull(query);
     }
@@ -47,15 +47,15 @@ class RealEstateDBTest {
     void createBusinessTable() throws SQLException {
         RealEstateDB db = new RealEstateDB();
         db.dropTable("business");
-        db.createBusinessTable();
+        db.createBusinessAndLocationTables();
     }
 
     @Test
     void insertBusinessTableData() throws SQLException {
         RealEstateDB db = new RealEstateDB();
         db.dropTable("business");
-        db.createBusinessTable();
-        db.insertBusinessTableData("test biz2", "http://biz2.com", 3.23, '5', true);
+        db.createBusinessAndLocationTables();
+        db.insertBusinessAndLocationTableData("test biz2", "http://biz2.com", 3.23, '5', true);
         ResultSet query = db.queryTable("business");
         assertNotNull(query);
     }

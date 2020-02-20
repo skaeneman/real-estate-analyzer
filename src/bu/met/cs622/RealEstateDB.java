@@ -117,7 +117,7 @@ public class RealEstateDB {
     /**
      * Creates a database table called 'Business'
 \    */
-    public void createBusinessTable() throws SQLException {
+    public void createBusinessAndLocationTables() throws SQLException {
         // check if the table was already created
         boolean doesTableExist = doesTableExist("business");
         if (doesTableExist != true) {
@@ -140,7 +140,7 @@ public class RealEstateDB {
                                 "PRIMARY KEY (id))");
                         prepstmt1.executeUpdate();
 
-                    // create the location table
+                    // create the location table with foreign key referencing business table
                     PreparedStatement prepstmt2 =
                         connection.prepareStatement("CREATE TABLE location(id serial," +
                                 "business_id int NOT NULL, " +
@@ -165,23 +165,56 @@ public class RealEstateDB {
     }
 
     /**
-     * Inserts data into the business database table
+     * Inserts data into the business and location database table
+     * @param
+     * @param
+     * @param
+     * @param
+     * @param
      */
-    public void insertBusinessTableData(String business_name, String url, double distance, double rating, Boolean is_closed) {
-        String b = business_name;
+    public void insertBusinessAndLocationTableData(String business_name, String url, double distance, double rating, Boolean is_closed) {
         try {
             Connection connection = establishConnection();
+
+            // insert data into the business table.
+            // return the auto generated index id's so that they can be passed to location table's foreign key
             PreparedStatement prepstmt =
                     connection.prepareStatement("INSERT INTO business (business_name, url, distance, rating, is_closed)" +
-                            " VALUES (?, ?, ?, ?, ?)");
+                            " VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             prepstmt.setString(1, business_name);
             prepstmt.setString(2, url);
             prepstmt.setDouble(3, distance);
             prepstmt.setDouble(4, rating);
             prepstmt.setBoolean(5, is_closed);
-
             prepstmt.executeUpdate();
+
+            ResultSet rs = prepstmt.getGeneratedKeys(); // get the foreign keys
+
+            // insert data into the location table and set the business_id foreign key
+            while (rs.next()) {
+                int business_id = rs.getInt(1);
+
+                PreparedStatement prepstmt2 =
+                    connection.prepareStatement("INSERT INTO location (business_id, city, country, address1, state, zip_code)" +
+                            " VALUES (?, ?, ?, ?, ?, ?)");
+
+                String city = "boston";
+                String country = "usa";
+                String address1 = "12 sdssds st";
+                String state = "ma";
+                String zip = "121212";
+
+
+                    prepstmt2.setInt(1, business_id);
+                    prepstmt2.setString(2, city);
+                    prepstmt2.setString(3, country);
+                    prepstmt2.setString(4, address1);
+                    prepstmt2.setString(5, state);
+                    prepstmt2.setString(6, zip);
+                    prepstmt2.executeUpdate();
+            }
+
             connection.close();
 
         } catch (SQLException  e) {
