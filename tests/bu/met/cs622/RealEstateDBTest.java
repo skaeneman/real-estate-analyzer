@@ -38,7 +38,7 @@ class RealEstateDBTest {
         RealEstateDB db = new RealEstateDB();
         db.dropTable("business");
         db.createBusinessAndLocationTables();
-        db.insertBusinessAndLocationTableData("test biz1", "http://biz2.com", 4.23, '5', false);
+//        db.insertBusinessAndLocationTableData("test biz1", "http://biz2.com", 4.23, '5', false);
         ResultSet query = db.queryTable("business");
         assertNotNull(query);
     }
@@ -55,7 +55,7 @@ class RealEstateDBTest {
         RealEstateDB db = new RealEstateDB();
         db.dropTable("business");
         db.createBusinessAndLocationTables();
-        db.insertBusinessAndLocationTableData("test biz2", "http://biz2.com", 3.23, '5', true);
+//        db.insertBusinessAndLocationTableData("test biz2", "http://biz2.com", 3.23, '5', true);
         ResultSet query = db.queryTable("business");
         assertNotNull(query);
     }

@@ -171,8 +171,15 @@ public class RealEstateDB {
      * @param
      * @param
      * @param
+     * @param
+     * @param
+     * @param
+     * @param
+     * @param     *
      */
-    public void insertBusinessAndLocationTableData(String business_name, String url, double distance, double rating, Boolean is_closed) {
+    public void insertBusinessAndLocationTableData(String business_name, String url, double distance, double rating,
+                                                   Boolean is_closed, String city, String country, String address1,
+                                                   String state, String zipCode) {
         try {
             Connection connection = establishConnection();
 
@@ -187,7 +194,8 @@ public class RealEstateDB {
             prepstmt.setDouble(3, distance);
             prepstmt.setDouble(4, rating);
             prepstmt.setBoolean(5, is_closed);
-            prepstmt.executeUpdate();
+
+            prepstmt.executeUpdate(); // insert data
 
             ResultSet rs = prepstmt.getGeneratedKeys(); // get the foreign keys
 
@@ -199,30 +207,21 @@ public class RealEstateDB {
                     connection.prepareStatement("INSERT INTO location (business_id, city, country, address1, state, zip_code)" +
                             " VALUES (?, ?, ?, ?, ?, ?)");
 
-                String city = "boston";
-                String country = "usa";
-                String address1 = "12 sdssds st";
-                String state = "ma";
-                String zip = "121212";
-
-
                     prepstmt2.setInt(1, business_id);
                     prepstmt2.setString(2, city);
                     prepstmt2.setString(3, country);
                     prepstmt2.setString(4, address1);
                     prepstmt2.setString(5, state);
-                    prepstmt2.setString(6, zip);
+                    prepstmt2.setString(6, zipCode);
+
                     prepstmt2.executeUpdate();
             }
-
             connection.close();
-
         } catch (SQLException  e) {
             System.err.println("Could not insert data into table...");
             e.printStackTrace();
         }
     }
-
-
+    
 
 }

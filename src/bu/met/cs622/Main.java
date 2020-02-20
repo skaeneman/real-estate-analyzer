@@ -432,13 +432,16 @@ public class Main {
             businessInfo.push("rating: " + businesses.get(i).getRating());
             businessInfo.push(businesses.get(i).getLocation().getCity() + ", "
                     + businesses.get(i).getLocation().getState() + " " + businesses.get(i).getLocation().getZipCode());
+            businessInfo.push(businesses.get(i).getLocation().getAddress1());
             businessInfo.push(businesses.get(i).getName());
             businessInfo.push(" ");
 
-            // store the businesses data to the database
+            // store the businesses data to the business and location database tables
             db.insertBusinessAndLocationTableData(businesses.get(i).getName(), businesses.get(i).getUrl(),
-                    miles, businesses.get(i).getRating(), businesses.get(i).getClosed());
-
+                    miles, businesses.get(i).getRating(), businesses.get(i).getClosed(),
+                    businesses.get(i).getLocation().getCity(), businesses.get(i).getLocation().getCountry(),
+                    businesses.get(i).getLocation().getAddress1(), businesses.get(i).getLocation().getState(),
+                    businesses.get(i).getLocation().getZipCode());
         }
 
         // find the closest business to the property
