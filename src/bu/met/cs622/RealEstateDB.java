@@ -87,7 +87,7 @@ public class RealEstateDB {
      * @param tableName     the name of the database table to query
      * @return ResultSet      returns the results of the query
      */
-    public ResultSet queryTable(String tableName) {
+    public ResultSet queryTable(String tableName, String orderBy) {
         ResultSet output = null;
         try {
             Connection connection = establishConnection();
@@ -96,7 +96,7 @@ public class RealEstateDB {
 //                    connection.prepareStatement("SELECT * FROM " + tableName);
 
             PreparedStatement prepstmt =
-                    connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY distance ASC");
+                    connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY " + orderBy + " ASC");
 
             ResultSet rset =  prepstmt.executeQuery();
             output = rset;
@@ -117,9 +117,11 @@ public class RealEstateDB {
      * Creates a database table called 'Business'
 \    */
     public void createBusinessAndLocationTables() throws SQLException {
-        // check if the table was already created
-        boolean doesTableExist = doesTableExist("business");
-        if (doesTableExist != true) {
+        // check if the tables were already created
+        boolean doesBizTableExist = doesTableExist("business");
+        boolean doesLocTableExist = doesTableExist("location");
+
+        if (!doesBizTableExist && !doesLocTableExist) {
             // try to create the tables
             try {
                 Connection connection = establishConnection();
