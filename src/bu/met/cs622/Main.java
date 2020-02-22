@@ -58,6 +58,7 @@ public class Main {
         String propertyType;
         String propertyCity;
         String propertyState;
+        boolean saveToDatabase = false;
         HashMap<Boolean, String> wantsToPrint = null;
 
         // get user input from Scanner
@@ -124,6 +125,13 @@ public class Main {
                 Integer propertyPrice = Integer.valueOf(input.nextLine().trim());
                 wantsToPrint = getPrintResponse();  // check if user wants to print
 
+                System.out.println("Save results to database (yes/no): ");
+                String saveToDb = input.nextLine().trim();
+
+                if (saveToDb.equalsIgnoreCase("yes") || saveToDb.equalsIgnoreCase("y")) {
+                    saveToDatabase = true;
+                }
+                
             } catch (NumberFormatException e) {
                 System.err.printf("error: Not a valid number %s. %nexiting program...", e.getMessage());
                 e.printStackTrace();
@@ -159,8 +167,8 @@ public class Main {
                 }
 
                 // get data from yelp API
-                System.out.printf("Fetching data from Yelp API in JSON format...%n");
-                getYelpData(propertyCity, propertyState);
+                System.out.printf("Fetching data from Yelp API...%n");
+                getYelpData(propertyCity, propertyState, saveToDatabase);
             }
         }
         else if (propertyType.equals("s")) {
@@ -184,8 +192,8 @@ public class Main {
                 }
 
                 // get data from yelp API
-                System.out.printf("Fetching data from Yelp API in JSON format...%n");
-                getYelpData(propertyCity, propertyState);            }
+                System.out.printf("Fetching data from Yelp API...%n");
+                getYelpData(propertyCity, propertyState, saveToDatabase);            }
         }
         input.close();
     }
@@ -405,8 +413,9 @@ public class Main {
      * store the data returned from yelp.
      * @param state     the state to search for businesses in
      * @param city      the city to search for businesses in
+     * @param saveToDatabase boolean value that determines if results should be saved to a DB
      */
-    public static void getYelpData(String city, String state) throws IOException {
+    public static void getYelpData(String city, String state, boolean saveToDatabase) throws IOException {
         // use googles gson library for handling json objects
         Gson gson = new Gson();
 
@@ -440,12 +449,14 @@ public class Main {
             businessInfo.push(businesses.get(i).getName());
             businessInfo.push(" ");
 
-            // store the businesses data to the business and location database tables
-            db.insertBusinessAndLocationTableData(businesses.get(i).getName(), businesses.get(i).getUrl(),
-                    miles, businesses.get(i).getRating(), businesses.get(i).getClosed(),
-                    businesses.get(i).getLocation().getCity(), businesses.get(i).getLocation().getCountry(),
-                    businesses.get(i).getLocation().getAddress1(), businesses.get(i).getLocation().getState(),
-                    businesses.get(i).getLocation().getZipCode());
+            if (saveToDatabase) {
+                // store the businesses data to the business and location database tables
+                db.insertBusinessAndLocationTableData(businesses.get(i).getName(), businesses.get(i).getUrl(),
+                        miles, businesses.get(i).getRating(), businesses.get(i).getClosed(),
+                        businesses.get(i).getLocation().getCity(), businesses.get(i).getLocation().getCountry(),
+                        businesses.get(i).getLocation().getAddress1(), businesses.get(i).getLocation().getState(),
+                        businesses.get(i).getLocation().getZipCode());
+            }
         }
 
         // find the closest business to the property
