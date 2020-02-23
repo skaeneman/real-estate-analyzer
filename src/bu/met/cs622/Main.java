@@ -58,6 +58,17 @@ public class Main {
         String propertyType;
         String propertyCity;
         String propertyState;
+        int principal = 0;
+        int loanInYears = 0;
+        int propertyValue = 0;
+        int propertyPrice = 0;
+        double propertyTaxes = 0;
+        double maintenance = 0;
+        double propertyInsurance = 0;
+        double utilities = 0;
+        double rentalIncome = 0;
+        double interestRate = 0;
+        double squareFeet = 0;
         boolean saveToDatabase = false;
         HashMap<Boolean, String> wantsToPrint = null;
 
@@ -118,16 +129,31 @@ public class Main {
         System.out.println("Enter the STATE where the property is located: ");
         propertyState = input.nextLine().trim();
 
+        // prompt for input and verify type is a double
+        interestRate = verifyDoubleInput("Enter the INTEREST RATE of the loan: ");
+        squareFeet = verifyDoubleInput("Enter the size of the property in SQUARE FEET: ");
+        propertyTaxes = verifyDoubleInput("Enter the annual PROPERTY TAXES: ");
+        maintenance = verifyDoubleInput("Enter the annual MAINTENANCE budget: ");
+        propertyInsurance = verifyDoubleInput("Enter the annual PROPERTY INSURANCE cost: ");
+        utilities = verifyDoubleInput("Enter the estimated annual cost of UTILITIES: ");
+        rentalIncome = verifyDoubleInput("Enter the projected RENTAL INCOME: ");
+
+        // prompt for input and verify type is an integer
+        propertyValue = verifyIntInput("Enter the current MARKET VALUE of the property: ");
+        principal = verifyIntInput("Enter the PRINCIPAL loan amount: ");
+        loanInYears = verifyIntInput("Enter the length of the MORTGAGE LOAN in YEARS: ");
+
         // ensure input is valid
         if (propertyType.equals("m") || propertyType.equals("s")) {
             try {
-                System.out.println("Enter price of investment property:");
-                Integer propertyPrice = Integer.valueOf(input.nextLine().trim());
+                propertyPrice = verifyIntInput("Enter price of investment property: ");
+
                 wantsToPrint = getPrintResponse();  // check if user wants to print
 
                 System.out.println("Save results to database (yes/no): ");
                 String saveToDb = input.nextLine().trim();
 
+                // save content to database
                 if (saveToDb.equalsIgnoreCase("yes") || saveToDb.equalsIgnoreCase("y")) {
                     saveToDatabase = true;
                 }
@@ -145,10 +171,8 @@ public class Main {
         // run real estate analysis based upon the type of property the user entered
         if (propertyType.equals("m")) {
             // downcast
-            InvestmentProperty multiFamProp = new MultiFamilyProperty(4.7, 3000, 300000,
-                    30, 1200, 15000,
-                    1200, 6000, 850000,
-                    90000);
+            InvestmentProperty multiFamProp = new MultiFamilyProperty(interestRate, squareFeet, principal, loanInYears,
+                    propertyTaxes, maintenance, propertyInsurance, utilities, propertyValue, rentalIncome);
 
             if (multiFamProp instanceof MultiFamilyProperty) {
                 propertyReport =
@@ -173,10 +197,8 @@ public class Main {
         }
         else if (propertyType.equals("s")) {
             // downcast
-            InvestmentProperty singleFamProp = new SingleFamilyProperty(3.9, 3230, 400000,
-                    20, 12550, 12200,
-                    1456, 5600, 950000,
-                    75000);
+            InvestmentProperty singleFamProp = new SingleFamilyProperty(interestRate, squareFeet, principal, loanInYears,
+                    propertyTaxes, maintenance, propertyInsurance, utilities, propertyValue, rentalIncome);
 
             if (singleFamProp instanceof SingleFamilyProperty) {
                 propertyReport = ((SingleFamilyProperty) singleFamProp).analyzeSingleFamilyProperty((SingleFamilyProperty) singleFamProp);
@@ -196,6 +218,48 @@ public class Main {
                 getYelpData(propertyCity, propertyState, saveToDatabase);            }
         }
         input.close();
+    }
+
+    /**
+     * Verifies that the input is of type Double.  Keeps looping if not a double.
+     * @param inputToValidate   the string response to validate is a double
+     */
+    public static double verifyDoubleInput(String inputToValidate) {
+        Scanner sc = new Scanner(System.in);
+        double number;
+        boolean error = false;
+        // keep looping if the input is not a double
+        do {
+            System.out.println(inputToValidate);
+            while (!sc.hasNextDouble()) {
+                System.out.println("Please enter a number...");
+                sc.next();
+                error = true;
+            }
+            number = sc.nextDouble();
+        } while (number < 0 || !error);
+        return number;
+    }
+
+    /**
+     * Verifies that the input is of type integer.  Keeps looping if not a integer.
+     * @param inputToValidate   the string response to validate is a integer
+     */
+    public static int verifyIntInput(String inputToValidate) {
+        Scanner sc = new Scanner(System.in);
+        int number;
+        boolean error = false;
+        // keep looping if the input is not a integer
+        do {
+            System.out.println(inputToValidate);
+            while (!sc.hasNextInt()) {
+                System.out.println("Please enter a number...");
+                sc.next();
+                error = true;
+            }
+            number = sc.nextInt();
+        } while (number < 0 || !error);
+        return number;
     }
 
     /**
