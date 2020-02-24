@@ -58,6 +58,7 @@ public class Main {
         String propertyType;
         String propertyCity;
         String propertyState;
+        String fetchYelpBiz = null;
         int principal = 0;
         int loanInYears = 0;
         int propertyValue = 0;
@@ -117,9 +118,6 @@ public class Main {
 
 
 
-
-
-
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine().trim();
 
@@ -157,7 +155,11 @@ public class Main {
                 if (saveToDb.equalsIgnoreCase("yes") || saveToDb.equalsIgnoreCase("y")) {
                     saveToDatabase = true;
                 }
-                
+
+                // get data from yelp API
+                System.out.printf("Fetch data about local businesses (yes/no): %n");
+                fetchYelpBiz = input.nextLine().trim();
+
             } catch (NumberFormatException e) {
                 System.err.printf("error: Not a valid number %s. %nexiting program...", e.getMessage());
                 e.printStackTrace();
@@ -191,8 +193,10 @@ public class Main {
                 }
 
                 // get data from yelp API
-                System.out.printf("Fetching data from Yelp API...%n");
-                getYelpData(propertyCity, propertyState, saveToDatabase);
+                if (fetchYelpBiz.equalsIgnoreCase("yes") || fetchYelpBiz.equalsIgnoreCase("y")) {
+                    System.out.printf("Fetching data from Yelp API...%n");
+                    getYelpData(propertyCity, propertyState, saveToDatabase);
+                }
             }
         }
         else if (propertyType.equals("s")) {
@@ -214,8 +218,11 @@ public class Main {
                 }
 
                 // get data from yelp API
-                System.out.printf("Fetching data from Yelp API...%n");
-                getYelpData(propertyCity, propertyState, saveToDatabase);            }
+                if (fetchYelpBiz.equalsIgnoreCase("yes") || fetchYelpBiz.equalsIgnoreCase("y")) {
+                    System.out.printf("Fetching data from Yelp API...%n");
+                    getYelpData(propertyCity, propertyState, saveToDatabase);
+                }
+            }
         }
         input.close();
     }
@@ -229,15 +236,14 @@ public class Main {
         double number;
         boolean error = false;
         // keep looping if the input is not a double
-        do {
-            System.out.println(inputToValidate);
-            while (!sc.hasNextDouble()) {
-                System.out.println("Please enter a number...");
-                sc.next();
-                error = true;
-            }
-            number = sc.nextDouble();
-        } while (number < 0 || !error);
+        System.out.println(inputToValidate);
+        while (!sc.hasNextDouble()) {
+            System.out.println("Please enter a number...");
+            sc.next();
+            error = true;
+        }
+        error = false;
+        number = sc.nextDouble();
         return number;
     }
 
@@ -250,15 +256,14 @@ public class Main {
         int number;
         boolean error = false;
         // keep looping if the input is not a integer
-        do {
-            System.out.println(inputToValidate);
-            while (!sc.hasNextInt()) {
-                System.out.println("Please enter a number...");
-                sc.next();
-                error = true;
-            }
-            number = sc.nextInt();
-        } while (number < 0 || !error);
+        System.out.println(inputToValidate);
+        while (!sc.hasNextInt()) {
+            System.out.println("Please enter a number...");
+            sc.next();
+            error = true;
+        }
+        error = false;
+        number = sc.nextInt();
         return number;
     }
 
