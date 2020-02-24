@@ -78,9 +78,6 @@ public class Main {
 
 
 
-
-
-
 ////        System.out.println("testing database connection...");
 //        RealEstateDB db = new RealEstateDB();
 ////        db.establishConnection();
@@ -116,8 +113,6 @@ public class Main {
 
 
 
-
-
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine().trim();
 
@@ -134,7 +129,7 @@ public class Main {
         maintenance = verifyDoubleInput("Enter the annual MAINTENANCE budget: ");
         propertyInsurance = verifyDoubleInput("Enter the annual PROPERTY INSURANCE cost: ");
         utilities = verifyDoubleInput("Enter the estimated annual cost of UTILITIES: ");
-        rentalIncome = verifyDoubleInput("Enter the projected RENTAL INCOME: ");
+        rentalIncome = verifyDoubleInput("Enter the projected annual RENTAL INCOME: ");
 
         // prompt for input and verify type is an integer
         propertyValue = verifyIntInput("Enter the current MARKET VALUE of the property: ");
@@ -157,7 +152,7 @@ public class Main {
                 }
 
                 // get data from yelp API
-                System.out.printf("Fetch data about local businesses (yes/no): %n");
+                System.out.printf("Fetch data about local businesses (yes/no): ");
                 fetchYelpBiz = input.nextLine().trim();
 
             } catch (NumberFormatException e) {
