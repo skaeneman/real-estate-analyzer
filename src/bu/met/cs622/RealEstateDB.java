@@ -85,15 +85,13 @@ public class RealEstateDB {
     /**
      * Querries a database table
      * @param tableName     the name of the database table to query
-     * @return ResultSet      returns the results of the query
+     * @param orderBy       the column to order the results by
+     * @return ResultSet    returns the results of the query
      */
     public ResultSet queryTable(String tableName, String orderBy) {
         ResultSet output = null;
         try {
             Connection connection = establishConnection();
-
-//            PreparedStatement prepstmt =
-//                    connection.prepareStatement("SELECT * FROM " + tableName);
 
             PreparedStatement prepstmt =
                     connection.prepareStatement("SELECT * FROM " + tableName + " ORDER BY " + orderBy + " ASC");
@@ -168,16 +166,16 @@ public class RealEstateDB {
     /**
      * Inserts data into the business and location database tables.  The location table takes a
      * foreign key from the business table.
-     * @param
-     * @param
-     * @param
-     * @param
-     * @param
-     * @param
-     * @param
-     * @param
-     * @param
-     * @param
+     * @param business_name     the name of the company
+     * @param url               the url opf the company's web site
+     * @param distance          the distance from the investment property to businesses
+     * @param rating            the Yelp star rating of the business
+     * @param is_closed         is the business currently closed\open
+     * @param city              the city the business is located in
+     * @param country           the country the business is in
+     * @param address1          the address of the business
+     * @param state             the state the business is in
+     * @param zipCode           the zip code of the business
      */
     public void insertBusinessAndLocationTableData(String business_name, String url, double distance, double rating,
                                                    Boolean is_closed, String city, String country, String address1,
