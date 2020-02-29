@@ -78,38 +78,17 @@ public class Main {
 
 
 
-////        System.out.println("testing database connection...");
-//        RealEstateDB db = new RealEstateDB();
-////        db.establishConnection();
-////
-//        System.out.println("checking if table exists 1...");
-//        boolean exists = db.doesTableExist("business");
-//        System.out.println(exists ? "yes" : "no");
-//
-////        String query = db.queryTable("business");
-////        System.out.printf("query database table...%n", query);
-//
-//        System.out.println("drop database table...");
-//        db.dropTable("location");
-//        db.dropTable("business");
-//
-//        System.out.println("checking if table exists 2...");
-//        boolean exists2 = db.doesTableExist("business");
-//        System.out.println(exists2 ? "yes" : "no");
-//
-//        System.out.println("creating database table...");
-//        db.createBusinessAndLocationTables();
-//
-//        System.out.println("insert business and location database tables...");
-//        db.insertBusinessAndLocationTableData("test biz1", "http://something.com", 0.01,
-//                3.2, true, "boston", "USA", "5656 fake st", "MA", "02139");
-//        db.insertBusinessAndLocationTableData("test biz2", "http://something.com", 0.01,
-//                1.8, true, "cambridge", "USA", "5656 fake st", "MA", "02139");
-//        db.insertBusinessAndLocationTableData("test biz3", "http://something.com", 0.01,
-//                4.1, true, "medford", "USA", "34 fake st", "MA", "02139");
-//
-//        System.out.printf("query database tables...%n");
-//        db.queryBusinessAndLocationData();
+
+        System.out.println("testing multi-threading...");
+        InterestRate thread1 = new InterestRate();
+        Thread thread2 = new Thread(thread1);
+        Thread thread3 = new Thread(thread1);
+
+        thread1.start();
+        thread2.start();
+//        thread3.start();
+
+
 
 
 
