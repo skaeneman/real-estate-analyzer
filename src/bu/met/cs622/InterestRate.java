@@ -15,15 +15,17 @@ public class InterestRate extends Thread {
             tempInterestRate = mortgageInterestRate;
             double newInterestRate;
             sleep(10);
+            System.out.printf("%nThread %s: current interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
+
             // deduct 25 basis points for mortgage each point
             for (int i = 0; i < numberOfPoints; i++) {
                 mortgageInterestRate = tempInterestRate - 0.25;  // 1 point is equal to 25 basis points (0.25%)
-                System.out.printf("%nin loop: %s", mortgageInterestRate);
+                System.out.printf("%nThread %s: in loop: %s", Thread.currentThread().getId(), mortgageInterestRate);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf("%ndeducting 1 point (0.25%%), new interest rate: %s", mortgageInterestRate);
+        System.out.printf("%nThread %s: deducting 1 point (0.25%%), new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
         return mortgageInterestRate;
     }
 
@@ -60,16 +62,18 @@ public class InterestRate extends Thread {
 
     public void run() {
         try {
-//            do {
-//                for (int i = 0; i < count; i++) {
-//                    calculateMortgagePoints(3);
-//                }
-//                sleep(20);
-//                count--;
-//            } while (count > 0);
+            System.out.printf ("%nthread %s is executing...%n", Thread.currentThread().getId());
+            do {
+                for (int i = 0; i < count; i++) {
+                    calculateMortgagePoints(i);
+                    System.out.printf("%ni is: %s", i);
+                }
+                sleep(20);
+                count--;
+            } while (count > 0);
 
-            sleep(20);
-            calculateMortgagePoints(3);
+//            sleep(20);
+//            calculateMortgagePoints(3);
         } catch (InterruptedException e) {
         }
     }
