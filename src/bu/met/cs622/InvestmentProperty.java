@@ -21,6 +21,7 @@ public abstract class InvestmentProperty {
     private final int marketValue;
     private final double rentalIncome;
 
+
     // constructor
     public InvestmentProperty(double squareFeet, int principal, int loanInYears, double taxes, double maintenance,
                               double insurance, double utilities, int marketValue, double rentalIncome) {
