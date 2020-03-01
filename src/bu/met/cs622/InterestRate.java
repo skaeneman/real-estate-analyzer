@@ -13,19 +13,19 @@ public class InterestRate extends Thread {
         try {
             double tempInterestRate;
             tempInterestRate = mortgageInterestRate;
-            double newInterestRate;
             sleep(10);
-            System.out.printf("%nThread %s: current interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
+            System.out.printf("%nThread %s: estimating mortgage points... current rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
 
-            // deduct 25 basis points for mortgage each point
+            // deduct 25 basis points for each mortgage point
             for (int i = 0; i < numberOfPoints; i++) {
-                mortgageInterestRate = tempInterestRate - 0.25;  // 1 point is equal to 25 basis points (0.25%)
-                System.out.printf("%nThread %s: in loop: %s", Thread.currentThread().getId(), mortgageInterestRate);
+                tempInterestRate = tempInterestRate - 0.25;  // 1 point is equal to 25 basis points (0.25%)
             }
+            mortgageInterestRate = tempInterestRate;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf("%nThread %s: deducting 1 point (0.25%%), new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
+        System.out.printf("%nThread %s: deducting %s mortgage points (%s%%), new interest rate: %s",
+                Thread.currentThread().getId(), numberOfPoints, numberOfPoints * 0.25, mortgageInterestRate);
         return mortgageInterestRate;
     }
 
@@ -39,16 +39,17 @@ public class InterestRate extends Thread {
             double tempInterestRate;
             tempInterestRate = mortgageInterestRate;
             sleep(10);
+            System.out.printf("%nThread %s: calculating mortgage interest... current rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
 
             if (creditScore > 680 && creditScore < 740) {
-                System.out.printf("adding 25 basis points, interest rate: %s", mortgageInterestRate);
                 mortgageInterestRate = tempInterestRate + 0.25;  // 1 point is equal to 25 basis points (0.25%)
+                System.out.printf("%nThread %s: adding 25 basis points, new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
             } else if (creditScore <= 680) {
-                System.out.printf("adding 50 basis points, interest rate: %s", mortgageInterestRate);
                 mortgageInterestRate = tempInterestRate + 0.50;
+                System.out.printf("%nThread %s: adding 50 basis points, new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
             } else {
                 //score is greater than 740
-                System.out.printf("interest rate: %s", mortgageInterestRate);
+                System.out.printf("%nThread %s: interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -57,24 +58,23 @@ public class InterestRate extends Thread {
     }
 
     public synchronized void getMortgageInterestRate() {
-        System.out.printf("the mortgage interest rate is: %s", mortgageInterestRate);
+        System.out.printf("%nThread %s: the mortgage interest rate is: %s", Thread.currentThread().getId(), mortgageInterestRate);
     }
 
     public void run() {
         try {
-            System.out.printf ("%nthread %s is executing...%n", Thread.currentThread().getId());
-            do {
-                for (int i = 0; i < count; i++) {
+            System.out.printf("%nThread %s is executing...", Thread.currentThread().getId());
+            calculateMortgageInterestRate(725);
+
+            while (count > 0) {
+                for (int i = 1; i <= count; i++) {
                     calculateMortgagePoints(i);
-                    System.out.printf("%ni is: %s", i);
                 }
                 sleep(20);
                 count--;
-            } while (count > 0);
-
-//            sleep(20);
-//            calculateMortgagePoints(3);
+            }
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
