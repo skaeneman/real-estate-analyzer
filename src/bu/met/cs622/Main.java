@@ -96,9 +96,16 @@ public class Main {
             for (Thread t : threadArray) {
                 t.start();
             }
+            // exits out of the demo
+            try {
+                thread2.join();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
+        System.out.printf("%n%nEnter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine().trim();
 
         System.out.println("Enter the CITY where the property is located: ");
