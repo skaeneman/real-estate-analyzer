@@ -45,8 +45,8 @@ public class InterestRate extends Thread {
                 mortgageInterestRate = tempInterestRate + 0.25;  // 1 point is equal to 25 basis points (0.25%)
                 System.out.printf("%nThread %s: adding 25 basis points, new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
             } else if (creditScore <= 680) {
-                mortgageInterestRate = tempInterestRate + 0.50;
-                System.out.printf("%nThread %s: adding 50 basis points, new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
+                mortgageInterestRate = tempInterestRate + 0.75;
+                System.out.printf("%nThread %s: adding 75 basis points, new interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);
             } else {
                 //score is greater than 740
                 System.out.printf("%nThread %s: interest rate: %s", Thread.currentThread().getId(), mortgageInterestRate);

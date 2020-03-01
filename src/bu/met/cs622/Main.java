@@ -79,14 +79,21 @@ public class Main {
 
 
 
-        System.out.println("testing multi-threading...");
+        System.out.println("Concurrency test...");
         InterestRate thread1 = new InterestRate();
         Thread thread2 = new Thread(thread1);
         Thread thread3 = new Thread(thread1);
 
-        thread1.start();
-        thread2.start();
-//        thread3.start();
+        ArrayList<Thread> threadArray = new ArrayList<>(); // create array
+
+        // add the threads to the array
+        threadArray.addAll(Arrays.asList(thread1, thread2, thread3));
+
+        // loop through array and start all threads
+        for (Thread t : threadArray) {
+            t.start();
+        }
+
 
 
 
