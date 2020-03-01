@@ -1,8 +1,8 @@
 package bu.met.cs622;
 
 public class InterestRate extends Thread {
-    private int count = 3;
-    private static double mortgageInterestRate = 3.75; // 30-year fixed interest rate on 2/29/2020
+    private volatile int count = 3;
+    private volatile static double mortgageInterestRate = 3.75; // 30-year fixed interest rate on 2/29/2020
 
     /**
      *
@@ -21,11 +21,11 @@ public class InterestRate extends Thread {
                 tempInterestRate = tempInterestRate - 0.25;  // 1 point is equal to 25 basis points (0.25%)
             }
             mortgageInterestRate = tempInterestRate;
+            System.out.printf("%nThread %s: deducting %s mortgage points (%s%%), new interest rate: %s",
+                    Thread.currentThread().getId(), numberOfPoints, numberOfPoints * 0.25, mortgageInterestRate);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf("%nThread %s: deducting %s mortgage points (%s%%), new interest rate: %s",
-                Thread.currentThread().getId(), numberOfPoints, numberOfPoints * 0.25, mortgageInterestRate);
         return mortgageInterestRate;
     }
 

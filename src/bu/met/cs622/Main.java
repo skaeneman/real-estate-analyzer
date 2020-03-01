@@ -76,28 +76,27 @@ public class Main {
         // get user input from Scanner
         Scanner input = new Scanner(System.in);
 
+        // show a demo of concurrency using multiple threads that are synchronized
+        System.out.println("Would you like to see a demo of concurrency (yes/no):");
+        String concurrencyDemo = input.nextLine();
 
+        // execute the multi-threaded demo
+        if ((concurrencyDemo.equalsIgnoreCase("yes")) || (concurrencyDemo.equalsIgnoreCase("y"))) {
+            System.out.println("Starting concurrency demo...");
+            InterestRate thread1 = new InterestRate();
+            Thread thread2 = new Thread(thread1);
+            Thread thread3 = new Thread(thread1);
 
+            ArrayList<Thread> threadArray = new ArrayList<>(); // create array
 
-        System.out.println("Concurrency test...");
-        InterestRate thread1 = new InterestRate();
-        Thread thread2 = new Thread(thread1);
-        Thread thread3 = new Thread(thread1);
+            // add the threads to the array
+            threadArray.addAll(Arrays.asList(thread1, thread2, thread3));
 
-        ArrayList<Thread> threadArray = new ArrayList<>(); // create array
-
-        // add the threads to the array
-        threadArray.addAll(Arrays.asList(thread1, thread2, thread3));
-
-        // loop through array and start all threads
-        for (Thread t : threadArray) {
-            t.start();
+            // loop through array and start up all the threads
+            for (Thread t : threadArray) {
+                t.start();
+            }
         }
-
-
-
-
-
 
         System.out.println("Enter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine().trim();
