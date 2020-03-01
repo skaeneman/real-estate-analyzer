@@ -78,7 +78,7 @@ public class Main {
 
         // show a demo of concurrency using multiple threads that are synchronized
         System.out.println("Would you like to see a demo of concurrency (yes/no):");
-        String concurrencyDemo = input.nextLine();
+        String concurrencyDemo = input.nextLine().trim();
 
         // execute the multi-threaded demo
         if ((concurrencyDemo.equalsIgnoreCase("yes")) || (concurrencyDemo.equalsIgnoreCase("y"))) {
@@ -96,16 +96,11 @@ public class Main {
             for (Thread t : threadArray) {
                 t.start();
             }
-            // exits out of the demo
-            try {
-                thread2.join();
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
         }
 
-        System.out.printf("%n%nEnter 'm' for multi-family or 's' for single-family investment property:");
+        System.out.printf("");
+        input.nextLine().trim();
+        System.out.printf("%nEnter 'm' for multi-family or 's' for single-family investment property:");
         propertyType = input.nextLine().trim();
 
         System.out.println("Enter the CITY where the property is located: ");
