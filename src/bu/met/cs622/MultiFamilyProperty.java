@@ -81,7 +81,7 @@ public class MultiFamilyProperty extends InvestmentProperty {
      * @param  propertyAnalysis    an ArrayList of strings that describe the property
      */
     public void display(ArrayList<String> propertyAnalysis) {
-        System.out.println("********************* Multi-Family Analysis *******************");
+        System.out.printf("%n********************* Multi-Family Analysis *******************%n");
 
         propertyAnalysis.stream()
                 .forEach(System.out::println);

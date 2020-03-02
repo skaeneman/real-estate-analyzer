@@ -56,9 +56,11 @@ public class SingleFamilyProperty extends InvestmentProperty {
         // call methods to run analysis on the property
         double mortgage = property.mortgagePayment(principal, loan, interest);
         double noi = property.netOperatingIncome(rentalIncome, taxes, maintenance, insurance, utilities);
+        double capRate = property.capitalizationRate(noi, marketValue);
 
         propertyAnalysisOutput.add("Single-Family mortgage payment " + mortgage);
         propertyAnalysisOutput.add("Single-Family Net Operating Income (NOI) " + noi);
+        propertyAnalysisOutput.add("Single-Family Capitalization Rate: " + capRate);
 
         return propertyAnalysisOutput;
     }
@@ -69,7 +71,7 @@ public class SingleFamilyProperty extends InvestmentProperty {
      * @return                     nothing
      */
     public void display(ArrayList<String> propertyAnalysis) {
-        System.out.println("************** Single-Family Property Analysis ****************");
+        System.out.printf("%n************** Single-Family Property Analysis ****************%n");
         propertyAnalysis.forEach(x -> System.out.println(x));
 
 //        propertyAnalysis.stream()

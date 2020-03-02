@@ -53,6 +53,23 @@ public class Main {
 
     } //main
 
+    public static void concurrencyDemo() {
+        System.out.println("Starting concurrency demo...");
+        InterestRate thread1 = new InterestRate();
+        Thread thread2 = new Thread(thread1);
+        Thread thread3 = new Thread(thread1);
+
+        ArrayList<Thread> threadArray = new ArrayList<>(); // create array
+
+        // add the threads to the array
+        threadArray.addAll(Arrays.asList(thread1, thread2, thread3));
+
+        // loop through array and start up all the threads
+        for (Thread t : threadArray) {
+            t.start();
+        }
+    }
+
     public static void getUserKeyboardInput() throws Exception {
         ArrayList<String> propertyReport;
         String propertyType;
@@ -82,25 +99,11 @@ public class Main {
 
         // execute the multi-threaded demo
         if ((concurrencyDemo.equalsIgnoreCase("yes")) || (concurrencyDemo.equalsIgnoreCase("y"))) {
-            System.out.println("Starting concurrency demo...");
-            InterestRate thread1 = new InterestRate();
-            Thread thread2 = new Thread(thread1);
-            Thread thread3 = new Thread(thread1);
-
-            ArrayList<Thread> threadArray = new ArrayList<>(); // create array
-
-            // add the threads to the array
-            threadArray.addAll(Arrays.asList(thread1, thread2, thread3));
-
-            // loop through array and start up all the threads
-            for (Thread t : threadArray) {
-                t.start();
-            }
+            concurrencyDemo();
+            input.nextLine();
         }
 
-        System.out.printf("");
-        input.nextLine().trim();
-        System.out.printf("%nEnter 'm' for multi-family or 's' for single-family investment property:");
+        System.out.printf("Enter 'm' for multi-family or 's' for single-family investment property:%n");
         propertyType = input.nextLine().trim();
 
         System.out.println("Enter the CITY where the property is located: ");
