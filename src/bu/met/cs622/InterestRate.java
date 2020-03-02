@@ -76,7 +76,7 @@ public class InterestRate extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.printf("%nDemo complete exiting program...");
+        // demo is over exit program
         System.exit(0);
     }
 
