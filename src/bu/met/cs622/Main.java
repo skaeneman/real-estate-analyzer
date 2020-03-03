@@ -53,6 +53,9 @@ public class Main {
 
     } //main
 
+    /**
+     * Launches a demonstration about concurrency using 3 threads
+     */
     public static void concurrencyDemo() {
         System.out.println("Starting concurrency demo...");
         InterestRate thread1 = new InterestRate();

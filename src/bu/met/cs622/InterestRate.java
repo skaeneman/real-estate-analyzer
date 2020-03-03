@@ -5,7 +5,7 @@ public class InterestRate extends Thread {
     private volatile static double mortgageInterestRate = 3.75; // 30-year fixed interest rate on 2/29/2020
 
     /**
-     *
+     * Calculates a new interest rate based off of how many points the borrower buys
      * @param numberOfPoints
      * @return mortgageInterestRate
      */
@@ -30,7 +30,7 @@ public class InterestRate extends Thread {
     }
 
     /**
-     *
+     * Calculates a new mortgage interest rate based off of credit scores
      * @param creditScore
      * @return mortgageInterestRate
      */
@@ -61,6 +61,7 @@ public class InterestRate extends Thread {
         System.out.printf("%nThread %s: the mortgage interest rate is: %s", Thread.currentThread().getId(), mortgageInterestRate);
     }
 
+    // runs the demo
     public void run() {
         try {
             System.out.printf("%nThread %s is executing...", Thread.currentThread().getId());
